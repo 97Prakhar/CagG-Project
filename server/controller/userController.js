@@ -1,44 +1,45 @@
-const userServices = require('../services/userServices')
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const details = mongoose.model('detailsModel');
 
-exports.getAllData = (req, res) => {
-    var response = {}
+module.exports.login = (req, res, next) => {
 
-    userServices.getAllData((err, data) => {
-        if (err) {
-            response.status = false;
-            response.error = err;
-            res.status(404).send(response);
-        } else {
-            response.status = true;
-            response.data = data;
-            res.status(200).send(response);
-        }
+}
+
+module.exports.register = (req, res, next) => {
+    var newUser = new User({
+        fullName = req.body.fullName,
+        email = req.body.email,
+        password = req.body.password,
+        confirmPassword = req.body.confirmPassword
+    });
+
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            if (err) throw err;
+            newUser.password = hash;
+            newUser.confirmPassword = hash;
+            if (password === confirmPassword) {
+                newUser.save(callback);
+            }
+        });
     });
 }
 
-exports.logIn = (req, res) => {
-    var response = {}
+module.exports.addDetails = (req, res, next) => {
+    var info = new details({
+        name = req.body.name,
+        surname = req.body.surname,
+        mailId = req.body.mailId,
+        contact = req.body.contact,
+        country = req.body.country,
+        state = req.body.state,
+        technology = req.body.technology,
+        mentor = req.body.mentor
+    });
 
-    req.checkBody('email', 'Invalid Email Address').isEmail();
-    req.checkBody('password', 'Invalid Password Length').isString().isLength({ min: 6 });
-
-    req.getValidationResult().then(err => {
-        if (err.isEmpty()) {
-            userServices.logIn(req.body, (err, data) => {
-                if (!err) {
-                    response.status = true;
-                    response.data = data;
-                    res.status(200).send(response);
-                } else {
-                    response.status = false;
-                    response.error = err;
-                    res.status(400).send(response);
-                }
-            });
-        } else {
-            response.status = false;
-            response.error = "Invalid Email or Password";
-            res.status(422).send(response);
-        }
+    info.save((err, doc) => {
+        if (!err)
+            res.send(doc);
     });
 }

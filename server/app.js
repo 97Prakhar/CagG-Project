@@ -1,11 +1,42 @@
-const express = require("express");
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const passport = require('passport');
+const mongoose = require('mongoose');
+
+const config = require('./config/config');
+const router = require('./router/router');
+
+mongoose.connect(config.DBPath, (err) => {
+    if (!err) {
+        console.log("Database Connection Succesful");
+    } else {
+        console.log("Error connecting to database")
+    }
+});
+
+mongoose.connection.on('connected', () => {
+    console.log('Connected to Database' + config.DBPath);
+});
+
+mongoose.connection.on('error', (err) => {
+    console.log('Database Error' + err);
+});
+
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.post("/login", (req, res) => {});
+app.use(cors());
 
-app.post("/sign-up", (req, res) => {});
+app.use(bodyParser.json());
 
-app.get("/dashboard", (req, res) => {});
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.listen(port, () => {})
+require('./config/passport')(passport);
+
+app.use('/api', router);
+
+const port = config.Port || 3000;
+
+app.listen(port, () => console.log("Server started at port: "+port));

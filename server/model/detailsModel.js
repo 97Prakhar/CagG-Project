@@ -12,6 +12,7 @@ const detailsSchema = new mongoose.Schema({
     mailId: {
         type: String,
         required: true,
+        unique: true
     },
     contact: {
         type: String,
@@ -28,7 +29,16 @@ const detailsSchema = new mongoose.Schema({
     technology: {
         type: String,
         required: true,
+    },
+    mentor: {
+        type: String,
+        required: true,
     }
 });
 
 module.exports = mongoose.model('detailsModel', detailsSchema);
+
+module.exports.getUserByMentor = function (username, callback) {
+    const query = { username: username }
+    User.findOne(query, callback);
+}

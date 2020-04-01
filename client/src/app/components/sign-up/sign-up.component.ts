@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,22 +15,16 @@ export class SignUpComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.minLength(4)]),
     surname: new FormControl('', [Validators.required, Validators.minLength(4)]),
     mail: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [Validators.required, Validators.pattern('([^\d])\d{10}([^\d])')]),
-    technology: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    country: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    state: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    userName: new FormControl('', [Validators.required, Validators.minLength(4)]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
+  constructor(private router: Router, private authService: AuthService) { }
+
+  ngOnInit() { }
+
   SignUp() {
-    this.router.navigateByUrl['login']
+    this.authService.registerUser(user);
+    this.router.navigateByUrl['/login'];
   }
-
-  constructor(private router: Router) { }
-
-  ngOnInit() {
-  }
-
 }
