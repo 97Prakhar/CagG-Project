@@ -37,8 +37,3 @@ const detailsSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('detailsModel', detailsSchema);
-
-module.exports.getUserByMentor = function (username, callback) {
-    const query = { username: username }
-    User.findOne(query, callback);
-}
