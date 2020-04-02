@@ -1,10 +1,10 @@
 <form [formGroup]="loginForm">
     <mat-form-field>
-        <input matInput placeholder="E mail ID" type="text" formControlName="mailId">
+        <input matInput placeholder="E mail ID" type="text" formControlName="mailIdFormControl">
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Password" type="password" formControlName="password">
+        <input matInput placeholder="Password" type="password" formControlName="passwordFormControl">
     </mat-form-field>
 
     <button mat-raised-button type="submit" [disabled]="!loginForm.valid" (click)="Login()">Login</button>

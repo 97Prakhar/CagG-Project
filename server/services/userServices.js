@@ -12,6 +12,35 @@ async function verifyPassword(givenPassword, hashedPassword) {
     return await bcrypt.compare(givenPassword, hashedPassword);
 }
 
+exports.comparePassword = (candidatePassword, hash, callback) => {
+    bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
+        if (err) throw err;
+        callback(null, isMatch);
+    });
+}
+
+exports.getUserByMailId = (email, callback) => {
+    userModel.findOne({ email: email }, async (err, user) => {
+        if (!user) {
+            err = "No user with the email found"
+            callback(err);
+        } else {
+            callback(null, user);
+        }
+    });
+}
+
+exports.getUserByMentor = (mentorName, callback) => {
+    userModel.findOne({ mentorName: mentorName }, async (err, user) => {
+        if (!user) {
+            err = "No user under the mentor found"
+            callback(err);
+        } else {
+            callback(null, user);
+        }
+    });
+}
+
 exports.addUser = (body, callback) => {
     userModel.findOne({ email: body.email }, async (err, user) => {
         if (err) callback(err);
@@ -46,28 +75,6 @@ exports.logIn = (body, callback) => {
                 var token = tokenFactory.generateToken(user);
                 callback(null, token);
             }
-        }
-    });
-}
-
-exports.getUserByMailId = (email, callback) => {
-    userModel.findOne({ email: email }, async (err, user) => {
-        if (!user) {
-            err = "No user with the email found"
-            callback(err);
-        } else {
-            callback(null, user);
-        }
-    });
-}
-
-exports.getUserByMentor = (mentorName, callback) => {
-    userModel.findOne({ mentorName: mentorName }, async (err, user) => {
-        if(!user) {
-            err = "No user under the mentor found"
-            callback(err);
-        } else {
-            callback(null, user);
         }
     });
 }

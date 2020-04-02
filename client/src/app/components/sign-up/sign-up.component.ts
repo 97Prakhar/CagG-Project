@@ -11,19 +11,28 @@ import { AuthService } from '../../services/auth/auth.service';
 
 export class SignUpComponent implements OnInit {
 
-  signupForm = new FormGroup({
-    firstName: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    mail: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(6)])
-  });
+  signupForm: FormGroup;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) {
+    this.signupForm = new FormGroup({
+      firstNameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      lastNameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      mailIdFormControl: new FormControl('', [Validators.required, Validators.email]),
+      passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      confirmPasswordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)])
+    });
+  }
 
   ngOnInit() { }
 
   SignUp() {
+    const user = {
+      firstName: this.signupForm.get('firstNameFormControl').value,
+      lastName: this.signupForm.get('lastNameFormControl').value,
+      mailId: this.signupForm.get('mailIdFormControl').value,
+      password: this.signupForm.get('passwordFormControl').value,
+      confirmPassword: this.signupForm.get('confirmPasswordFormControl').value
+    }
     this.authService.registerUser(user);
     this.router.navigateByUrl['/login'];
   }

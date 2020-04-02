@@ -11,23 +11,25 @@ import { AuthService } from '../../services/auth/auth.service';
 
 export class LoginComponent implements OnInit {
 
-  loginForm = new FormGroup({
-    mailId: new FormControl('', [ Validators.required, Validators.email ]),
-    password: new FormControl('', [ Validators.required, Validators.minLength(6) ]),
-  });
+  loginForm: FormGroup;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService) {
+    this.loginForm = new FormGroup({
+      mailIdFormControl: new FormControl('', [Validators.required, Validators.email]),
+      passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    });
+  }
 
   ngOnInit() { }
 
   Login() {
     const user = {
-      mailId: this.mailId,
-      password: this.password
+      mailId: this.loginForm.get('mailIdFormControl').value,
+      password: this.loginForm.get('passwordFormControl').value
     }
-    this.authService.authenticateUser(user).subscribe(data => {
-      if(data.success){
-        this.authService.storeUserData(data.token, data.user);
+    this.authService.authenticateUser(user).subscribe(res => {
+      if (res.status) {
+        this.authService.storeUserData(res.data.token, res.data.email);
         this.router.navigate(['dashboard']);
       } else {
         this.router.navigate(['login']);
