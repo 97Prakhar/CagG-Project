@@ -89,15 +89,6 @@ exports.authenticate = (req, res) => {
                             email: user.email                            
                         }
                         res.status(200).send(response);
-                        // res.json({
-                        //     success: true,
-                        //     token: 'JWT ' + token,
-                        //     user: {
-                        //         firstName: user.firstName,
-                        //         lastName: user.lastName,
-                        //         email: user.email
-                        //     }
-                        // })
                     } else {
                         response.status = false;
                         response.error = "Wrong Password";
