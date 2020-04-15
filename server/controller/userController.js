@@ -1,9 +1,4 @@
-const mongoose = require('mongoose');
-// const User = mongoose.model('userModel');
-// const details = mongoose.model('detailsModel');
 const userServices = require('../services/userServices');
-const userModel = require('../model/userModel');
-const detailsModel = require('../model/detailsModel');
 
 exports.logIn = (req, res) => {
     var response = {}
