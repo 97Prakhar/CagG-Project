@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
-const User = mongoose.model('userModel');
-const details = mongoose.model('detailsModel');
+// const User = mongoose.model('userModel');
+// const details = mongoose.model('detailsModel');
 const userServices = require('../services/userServices');
+const userModel = require('../model/userModel');
+const detailsModel = require('../model/detailsModel');
 
 exports.logIn = (req, res) => {
     var response = {}
@@ -103,16 +105,3 @@ exports.authenticate = (req, res) => {
         }
     });
 }
-
-// exports.addDetails = (req, res, next) => {
-//     var info = new details({
-//         firstName = req.body.firstName,
-//         lastName = req.body.lastName,
-//         mailId = req.body.mailId
-//     });
-
-//     info.save((err, doc) => {
-//         if (!err)
-//             res.send(doc);
-//     });
-// }

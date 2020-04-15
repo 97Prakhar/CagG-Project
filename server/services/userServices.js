@@ -1,5 +1,7 @@
 const bcrypt = require('bcryptjs');
 const config = require('../config/config');
+const userModel = require('../model/userModel');
+const detailsModel = require('../model/detailsModel');
 
 async function generatePassword(password) {
     const salt = await bcrypt.genSalt(10);

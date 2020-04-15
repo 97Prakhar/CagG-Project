@@ -6,7 +6,6 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 
 const config = require('./config/config');
-const router = require('./router/router');
 
 mongoose.connect(config.DBPath, (err) => {
     if (!err) {
@@ -24,10 +23,13 @@ mongoose.connection.on('error', (err) => {
     console.log('Database Error' + err);
 });
 
+const UserRouter = require('./router/router');
+
 const app = express();
 
 app.use(cors());
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(passport.initialize());
@@ -35,7 +37,7 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
-app.use('/api', router);
+app.use('/api', UserRouter);
 
 const port = config.Port || 3000;
 
