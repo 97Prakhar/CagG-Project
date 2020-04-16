@@ -10,12 +10,12 @@ import {Router} from '@angular/router';
 
 export class DashboardComponent implements OnInit {
 
-  user: Object:
+  user: Object;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.authService.getProfile().subscribe(profile => {
+    this.authService.getProfile().subscribe((profile:any) => {
       this.user = profile.user;
     },
     err => {
@@ -23,5 +23,4 @@ export class DashboardComponent implements OnInit {
       return false;
     });
   }
-
 }
