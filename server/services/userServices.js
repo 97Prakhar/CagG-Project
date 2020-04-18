@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
-const config = require('../config/config');
+const jwt = require('jsonwebtoken');
 const userModel = require('../model/userModel');
 const detailsModel = require('../model/detailsModel');
+const config = require('../config/config');
 
 async function generatePassword(password) {
     const salt = await bcrypt.genSalt(10);
@@ -53,7 +54,8 @@ exports.addUser = (body, callback) => {
                 firstName: body.firstName,
                 lastName: body.lastName,
                 email: body.email,
-                password: await generatePassword(body.password)
+                password: await generatePassword(body.password),
+                role: body.role
             });
             user.save((err, data) => {
                 if (err) callback(err);
@@ -74,7 +76,7 @@ exports.logIn = (body, callback) => {
             if (!validPass) {
                 callback("Invalid Password");
             } else {
-                var token = tokenFactory.generateToken(user);
+                var token = jwt.sign({ email: user.email }, config.secret, { expiresIn: '1h' });
                 callback(null, token);
             }
         }

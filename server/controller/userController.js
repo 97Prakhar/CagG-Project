@@ -1,5 +1,10 @@
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
 const userServices = require('../services/userServices');
 
+/**
+ * Required : Email, Password
+*/
 exports.logIn = (req, res) => {
     var response = {}
 
@@ -28,6 +33,9 @@ exports.logIn = (req, res) => {
     });
 }
 
+/**
+ * Required : First Name, Last Name, Email, Password, Confirm Password, Role
+*/
 exports.register = (req, res) => {
     var response = {}
 
@@ -35,6 +43,7 @@ exports.register = (req, res) => {
     req.checkBody('lastName', 'Invalid Name or Length of Name').isString().isLength({ min: 4 });
     req.checkBody('email', 'Invalid Email Id').isEmail();
     req.checkBody('password', 'Invalid Password Length').isString().isLength({ min: 6 }).equals(req.body.confirmPassword);
+    req.checkBody('role', 'Invalid Role').isString();
 
     req.getValidationResult().then((err) => {
         if (err.isEmpty()) {
@@ -58,6 +67,9 @@ exports.register = (req, res) => {
     });
 }
 
+/**
+ * Required : Email, Password, Confirm Password
+*/
 exports.authenticate = (req, res) => {
     var response = {}
 
@@ -74,16 +86,16 @@ exports.authenticate = (req, res) => {
                     res.send(response);
                 }
 
-                userServices.comparePassword(password, user.password, (err, isMatch) => {
+                userServices.comparePassword(req.body.password, data.password, (err, isMatch) => {
                     if (err) throw err;
                     if (isMatch) {
-                        const token = jwt.sign({ data: user }, config.secret, {
+                        const token = jwt.sign({ data: data }, config.secret, {
                             expiresIn: 604800 // 1 week
                         });
                         response.status = true;
                         response.data = {
                             token: 'JWT ' + token,                            
-                            email: user.email                            
+                            email: data.email                            
                         }
                         res.status(200).send(response);
                     } else {
