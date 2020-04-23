@@ -7,7 +7,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import {AuthGuard} from './services/authGuard/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  // { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate:[AuthGuard] },

@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth/auth.service';
 
 export class SignUpComponent implements OnInit {
 
+  selectedValue: string;
   signupForm: FormGroup;
 
   constructor(private router: Router, private authService: AuthService) {
@@ -19,15 +20,9 @@ export class SignUpComponent implements OnInit {
       lastNameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
       mailIdFormControl: new FormControl('', [Validators.required, Validators.email]),
       passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      confirmPasswordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      roleFormControl: new FormControl('', [Validators.required])
+      confirmPasswordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
-
-  roles = [
-    { value: 'Mentor', viewValue: 'Mentor' },
-    { value: 'Mentee', viewValue: 'Mentee' }
-  ];
 
   ngOnInit() { }
 
@@ -37,8 +32,7 @@ export class SignUpComponent implements OnInit {
       lastName: this.signupForm.get('lastNameFormControl').value,
       mailId: this.signupForm.get('mailIdFormControl').value,
       password: this.signupForm.get('passwordFormControl').value,
-      confirmPassword: this.signupForm.get('confirmPasswordFormControl').value,
-      role: this.signupForm.get('roleFormControl').value
+      confirmPassword: this.signupForm.get('confirmPasswordFormControl').value
     }
     this.authService.registerUser(user);
     this.router.navigateByUrl['/login'];

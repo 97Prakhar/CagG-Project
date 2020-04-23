@@ -19,14 +19,14 @@
         <input matInput placeholder="Confirm Password" type="text" formControlName="confirmPasswordFormControl">
     </mat-form-field>
 
-    <mat-form-field formControlName="roleFormControl">
+    <mat-form-field>
         <mat-label>Role</mat-label>
-        <mat-select>
+        <mat-select [(ngModel)]="selectedValue" formControlName="roleFormControl">
             <mat-option *ngFor="let role of roles" [value]="role.value">
                 {{role.viewValue}}
             </mat-option>
         </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button type="submit" [disabled]="!signupForm.valid" (click)="SignUp()">Sign Up</button>
+    <button mat-raised-button type="submit" (click)="SignUp()">Sign Up</button>
 </form>

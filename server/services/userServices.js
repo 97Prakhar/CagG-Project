@@ -54,8 +54,8 @@ exports.addUser = (body, callback) => {
                 firstName: body.firstName,
                 lastName: body.lastName,
                 email: body.email,
-                password: await generatePassword(body.password),
-                role: body.role
+                password: await generatePassword(body.password)
+                // role: body.role
             });
             user.save((err, data) => {
                 if (err) callback(err);

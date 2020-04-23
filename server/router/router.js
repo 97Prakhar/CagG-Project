@@ -1,4 +1,5 @@
 const userController = require('../controller/userController');
+const passport = require('passport');
 const router = require('express').Router();
 
 router.post('/login', userController.logIn);

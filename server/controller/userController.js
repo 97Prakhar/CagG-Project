@@ -34,7 +34,7 @@ exports.logIn = (req, res) => {
 }
 
 /**
- * Required : First Name, Last Name, Email, Password, Confirm Password, Role
+ * Required : First Name, Last Name, Email, Password, Confirm Password
  * Returns status, data/error
 */
 exports.register = (req, res) => {
@@ -44,7 +44,7 @@ exports.register = (req, res) => {
     req.checkBody('lastName', 'Invalid Name or Length of Name').isString().isLength({ min: 4 });
     req.checkBody('email', 'Invalid Email Id').isEmail();
     req.checkBody('password', 'Invalid Password Length').isString().isLength({ min: 6 }).equals(req.body.confirmPassword);
-    req.checkBody('role', 'Invalid Role').isString();
+    // req.checkBody('role', 'Invalid Role').isString();
 
     req.getValidationResult().then((err) => {
         if (err.isEmpty()) {

@@ -1,10 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatSelectModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthService } from './services/auth/auth.service';
+import { AuthGuard } from './services/authGuard/auth.guard';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -21,11 +24,11 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
     EditProfileComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule,
-    AppRoutingModule,
-    ReactiveFormsModule, MatSelectModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule
+    HttpClientModule, BrowserModule, BrowserAnimationsModule,
+    AppRoutingModule, FormsModule, ReactiveFormsModule,
+    MatSelectModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 
