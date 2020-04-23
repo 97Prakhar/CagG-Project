@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatSelectModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
+import { MatInputModule, MatSelectModule, MatFormFieldModule, MatButtonModule, MatCardModule, MatSnackBarModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './services/auth/auth.service';
@@ -25,7 +25,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
   ],
   imports: [
     HttpClientModule, BrowserModule, BrowserAnimationsModule,
-    AppRoutingModule, FormsModule, ReactiveFormsModule,
+    AppRoutingModule, FormsModule, ReactiveFormsModule, MatCardModule,
     MatSelectModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule
   ],
   providers: [AuthService, AuthGuard],
