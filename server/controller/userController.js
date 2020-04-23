@@ -1,9 +1,10 @@
-const jwt = require('jsonwebtoken');
-const config = require('../config/config');
 const userServices = require('../services/userServices');
+const config = require('../config/config');
+const jwt = require('jsonwebtoken');
 
 /**
  * Required : Email, Password
+ * Returns status, data/error
 */
 exports.logIn = (req, res) => {
     var response = {}
@@ -17,7 +18,6 @@ exports.logIn = (req, res) => {
                 if (!err) {
                     response.status = true;
                     response.data = data;
-
                     res.status(200).send(response);
                 } else {
                     response.status = false;
@@ -35,6 +35,7 @@ exports.logIn = (req, res) => {
 
 /**
  * Required : First Name, Last Name, Email, Password, Confirm Password, Role
+ * Returns status, data/error
 */
 exports.register = (req, res) => {
     var response = {}
@@ -55,7 +56,6 @@ exports.register = (req, res) => {
                 } else {
                     response.status = true;
                     response.data = data;
-
                     res.status(200).send(response);
                 }
             });
@@ -69,6 +69,7 @@ exports.register = (req, res) => {
 
 /**
  * Required : Email, Password, Confirm Password
+ * Returns status, (token, email)/error
 */
 exports.authenticate = (req, res) => {
     var response = {}
@@ -94,8 +95,8 @@ exports.authenticate = (req, res) => {
                         });
                         response.status = true;
                         response.data = {
-                            token: 'JWT ' + token,                            
-                            email: data.email                            
+                            token: 'JWT ' + token,
+                            email: data.email
                         }
                         res.status(200).send(response);
                     } else {
@@ -104,6 +105,40 @@ exports.authenticate = (req, res) => {
                         res.send(response);
                     }
                 });
+            });
+        } else {
+            response.status = false;
+            response.error = "Invalid Details Entered";
+            res.status(500).send(response);
+        }
+    });
+}
+
+/**
+ * Required : Contact, Country, State, Technology, Mentor
+ * Returns status, data/error
+*/
+exports.editUser = (req, res) => {
+    var response = {}
+
+    req.checkBody('contact', 'Invalid Contact Number').isString().isLength({ min: 10 });
+    req.checkBody('country', 'Invalid Country').isString().isLength({ min: 3 });
+    req.checkBody('state', 'Invalid State').isString().isLength({ min: 3 });
+    req.checkBody('technology', 'Invalid Technology').isString().isLength({ min: 3 });
+    req.checkBody('mentor', 'Invalid Mentor Name').isString().isLength({ min: 3 });
+
+    req.getValidationResult().then((err) => {
+        if (err.isEmpty()) {
+            userServices.editUser(req.body, (err, data) => {
+                if (err) {
+                    response.status = false;
+                    response.error = err;
+                    res.status(422).send(response);
+                } else {
+                    response.status = true;
+                    response.data = data;
+                    res.status(200).send(response);
+                }
             });
         } else {
             response.status = false;

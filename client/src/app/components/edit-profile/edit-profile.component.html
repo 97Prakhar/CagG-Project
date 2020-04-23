@@ -1,0 +1,23 @@
+<form [formGroup]="editProfileForm">
+    <mat-form-field>
+        <input matInput placeholder="Contact Number" type="text" formControlName="contactFormControl">
+    </mat-form-field>
+    
+    <mat-form-field>
+        <input matInput placeholder="Country" type="text" formControlName="countryFormControl">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="State" type="text" formControlName="stateFormControl">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Technology" type="text" formControlName="techFormControl">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Mentor" type="text" formControlName="mentorFormControl">
+    </mat-form-field>
+
+    <button mat-raised-button type="submit" [disabled]="!editProfileForm.valid" (click)="Save()">Save</button>
+</form>

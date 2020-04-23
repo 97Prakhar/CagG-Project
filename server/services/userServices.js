@@ -1,8 +1,8 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+const config = require('../config/config');
 const userModel = require('../model/userModel');
 const detailsModel = require('../model/detailsModel');
-const config = require('../config/config');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 async function generatePassword(password) {
     const salt = await bcrypt.genSalt(10);
@@ -34,7 +34,7 @@ exports.getUserByMailId = (email, callback) => {
 }
 
 exports.getUserByMentor = (mentorName, callback) => {
-    userModel.findOne({ mentorName: mentorName }, async (err, user) => {
+    detailsModel.findOne({ mentorName: mentorName }, async (err, user) => {
         if (!user) {
             err = "No user under the mentor found"
             callback(err);
@@ -80,5 +80,22 @@ exports.logIn = (body, callback) => {
                 callback(null, token);
             }
         }
+    });
+}
+
+exports.editUser = (body, callback) => {
+    //Find User from UserModel, send its first name, last name, email to details model
+    //Other details are already present in body
+
+    var user = new detailsModel({
+        contact: body.contact,
+        country: body.country,
+        state: body.state,
+        technology: body.technology,
+        mentor: body.mentor
+    });
+    user.save((err, data) => {
+        if (err) callback(err);
+        else callback(null, data);
     });
 }

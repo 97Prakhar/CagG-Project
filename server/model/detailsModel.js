@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
 
 const detailsSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    surname: {
-        type: String,
-        required: true,
-    },
-    mailId: {
-        type: String,
-        required: true,
-        unique: true
-    },
+    // firstName: {
+    //     type: String,
+    //     required: true,
+    // },
+    // lastName: {
+    //     type: String,
+    //     required: true,
+    // },
+    // email: {
+    //     type: String,
+    //     required: true,
+    //     unique: true
+    // },
     contact: {
         type: String,
         required: true,
