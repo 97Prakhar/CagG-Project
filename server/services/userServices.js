@@ -11,10 +11,6 @@ async function generatePassword(password) {
     if (hashedPassword) return hashedPassword;
 }
 
-async function verifyPassword(givenPassword, hashedPassword) {
-    return await bcrypt.compare(givenPassword, hashedPassword);
-}
-
 exports.comparePassword = (candidatePassword, hash, callback) => {
     bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
         if (err) throw err;
@@ -61,24 +57,6 @@ exports.addUser = (body, callback) => {
                 if (err) callback(err);
                 else callback(null, data);
             });
-        }
-    });
-}
-
-exports.logIn = (body, callback) => {
-    userModel.findOne({ email: body.email }, async (err, user) => {
-        if (!user) {
-            err = "No User with this email exists"
-            callback(err);
-        } else {
-            var validPass = await verifyPassword(body.password, user.password);
-
-            if (!validPass) {
-                callback("Invalid Password");
-            } else {
-                var token = jwt.sign({ email: user.email }, config.secret, { expiresIn: '1h' });
-                callback(null, token);
-            }
         }
     });
 }

@@ -3,37 +3,6 @@ const config = require('../config/config');
 const jwt = require('jsonwebtoken');
 
 /**
- * Required : Email, Password
- * Returns status, data/error
-*/
-exports.logIn = (req, res) => {
-    var response = {}
-
-    req.checkBody('email', 'Invalid Email Address').isEmail();
-    req.checkBody('password', 'Invalid Password Length').isString().isLength({ min: 6 });
-
-    req.getValidationResult().then(err => {
-        if (err.isEmpty()) {
-            userServices.logIn(req.body, (err, data) => {
-                if (!err) {
-                    response.status = true;
-                    response.data = data;
-                    res.status(200).send(response);
-                } else {
-                    response.status = false;
-                    response.error = err;
-                    res.status(400).send(response);
-                }
-            });
-        } else {
-            response.status = false;
-            response.error = "Invalid Email or Password";
-            res.status(422).send(response);
-        }
-    });
-}
-
-/**
  * Required : First Name, Last Name, Email, Password, Confirm Password
  * Returns status, data/error
 */
@@ -83,7 +52,7 @@ exports.authenticate = (req, res) => {
                 if (err) throw err;
                 if (!data) {
                     response.status = false;
-                    response.error = "User not found";
+                    response.error = "User Not Found";
                     res.send(response);
                 }
 
@@ -122,10 +91,10 @@ exports.editUser = (req, res) => {
     var response = {}
 
     req.checkBody('contact', 'Invalid Contact Number').isString().isLength({ min: 10 });
-    req.checkBody('country', 'Invalid Country').isString().isLength({ min: 3 });
-    req.checkBody('state', 'Invalid State').isString().isLength({ min: 3 });
-    req.checkBody('technology', 'Invalid Technology').isString().isLength({ min: 3 });
-    req.checkBody('mentor', 'Invalid Mentor Name').isString().isLength({ min: 3 });
+    req.checkBody('country', 'Invalid Country').isString().isLength({ min: 4 });
+    req.checkBody('state', 'Invalid State').isString().isLength({ min: 4 });
+    req.checkBody('technology', 'Invalid Technology').isString().isLength({ min: 4 });
+    //req.checkBody('mentor', 'Invalid Mentor Name').isString().isLength({ min: 4 });
 
     req.getValidationResult().then((err) => {
         if (err.isEmpty()) {

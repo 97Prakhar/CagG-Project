@@ -2,7 +2,6 @@ const userController = require('../controller/userController');
 const passport = require('passport');
 const router = require('express').Router();
 
-router.post('/login', userController.logIn);
 router.post('/register', userController.register);
 router.post('/authenticate', userController.authenticate);
 router.get('/dashboard', passport.authenticate('jwt', { session: false }), (req, res, next) => {

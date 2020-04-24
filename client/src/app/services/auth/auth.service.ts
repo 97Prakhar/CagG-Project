@@ -27,6 +27,12 @@ export class AuthService {
     return this.http.post('http://localhost:3000/api/authenticate', user, { headers: headers });
   }
 
+  editProfile(data) {
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost:3000/api/edit', data, { headers: headers });
+  }
+
   getProfile() {
     let headers = new HttpHeaders();
     this.loadToken();

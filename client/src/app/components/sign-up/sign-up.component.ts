@@ -10,9 +10,9 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./sign-up.component.scss']
 })
 
-// export class SignUpComponent implements OnInit {
-  export class SignUpComponent {
-  selectedValue: string;
+export class SignUpComponent implements OnInit {
+  
+  //selectedValue: string;
   signupForm: FormGroup;
 
   constructor(private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
@@ -40,7 +40,7 @@ import { AuthService } from '../../services/auth/auth.service';
         this.authService.registerUser(user);
         this.router.navigateByUrl['/login'];
       } else {
-        this.snackBar.open("Password don't match", '', {
+        this.snackBar.open("Passwords don't match", '', {
           duration: 1500
         });
       }
