@@ -3,7 +3,7 @@ const passport = require('passport');
 const router = require('express').Router();
 
 router.post('/register', userController.register);
-router.post('/authenticate', userController.authenticate);
+router.post('/logIn', userController.logIn);
 router.get('/dashboard', passport.authenticate('jwt', { session: false }), (req, res, next) => {
     var response = {}
     response.status = true;

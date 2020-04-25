@@ -21,10 +21,10 @@ export class AuthService {
     return this.http.post('http://localhost:3000/api/register', user, { headers: headers });
   }
 
-  authenticateUser(user) {
+  logInUser(user) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/api/authenticate', user, { headers: headers });
+    return this.http.post('http://localhost:3000/api/logIn', user, { headers: headers });
   }
 
   editProfile(data) {

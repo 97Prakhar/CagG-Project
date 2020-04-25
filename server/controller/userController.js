@@ -37,14 +37,14 @@ exports.register = (req, res) => {
 }
 
 /**
- * Required : Email, Password, Confirm Password
+ * Required : Email, Password
  * Returns status, (token, email)/error
 */
-exports.authenticate = (req, res) => {
+exports.logIn = (req, res) => {
     var response = {}
 
     req.checkBody('email', 'Invalid Email Id').isEmail();
-    req.checkBody('password', 'Invalid Password Length').isString().isLength({ min: 6 }).equals(req.body.confirmPassword);
+    req.checkBody('password', 'Invalid Password Length').isString().isLength({ min: 6 });
 
     req.getValidationResult().then((err) => {
         if (err.isEmpty()) {

@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         mailId: this.loginForm.get('mailIdFormControl').value,
         password: this.loginForm.get('passwordFormControl').value
       }
-      this.authService.authenticateUser(user).subscribe((res: any) => {
+      this.authService.logInUser(user).subscribe((res: any) => {
         if (res.status) {
           this.authService.storeUserData(res.data.token, res.data.email);
           this.router.navigate(['dashboard']);
