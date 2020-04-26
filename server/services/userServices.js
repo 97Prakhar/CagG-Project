@@ -29,16 +29,16 @@ exports.getUserByMailId = (email, callback) => {
     });
 }
 
-exports.getUserByMentor = (mentorName, callback) => {
-    detailsModel.findOne({ mentorName: mentorName }, async (err, user) => {
-        if (!user) {
-            err = "No user under the mentor found"
-            callback(err);
-        } else {
-            callback(null, user);
-        }
-    });
-}
+// exports.getUserByMentor = (mentorName, callback) => {
+//     detailsModel.findOne({ mentorName: mentorName }, async (err, user) => {
+//         if (!user) {
+//             err = "No user under the mentor found"
+//             callback(err);
+//         } else {
+//             callback(null, user);
+//         }
+//     });
+// }
 
 exports.addUser = (body, callback) => {
     userModel.findOne({ email: body.email }, async (err, user) => {
@@ -62,18 +62,24 @@ exports.addUser = (body, callback) => {
 }
 
 exports.editUser = (body, callback) => {
-    //Find User from UserModel, send its first name, last name, email to details model
-    //Other details are already present in body
 
-    var user = new detailsModel({
-        contact: body.contact,
-        country: body.country,
-        state: body.state,
-        technology: body.technology,
-        mentor: body.mentor
-    });
-    user.save((err, data) => {
+    detailsModel.findOneAndUpdate({ email: body.email }, async (err, user) => {
         if (err) callback(err);
-        else callback(null, data);
+        else {
+            var user = new detailsModel({
+                firstName: body.firstName,
+                lastName: body.lastName,
+                email: body.email,
+                contact: body.contact,
+                country: body.country,
+                state: body.state,
+                technology: body.technology,
+                //mentor: body.mentor
+            });
+            user.save((err, data) => {
+                if (err) callback(err);
+                else callback(null, data);
+            });
+        }
     });
 }

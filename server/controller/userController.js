@@ -84,12 +84,15 @@ exports.logIn = (req, res) => {
 }
 
 /**
- * Required : Contact, Country, State, Technology, Mentor
+ * Required : First Name, Last Name, Email, Contact, Country, State, Technology, Mentor
  * Returns status, data/error
 */
 exports.editUser = (req, res) => {
     var response = {}
 
+    req.checkBody('firstName', 'Invalid Name or Length of Name').isString().isLength({ min: 4 });
+    req.checkBody('lastName', 'Invalid Name or Length of Name').isString().isLength({ min: 4 });
+    req.checkBody('email', 'Invalid Email Id').isEmail();
     req.checkBody('contact', 'Invalid Contact Number').isString().isLength({ min: 10 });
     req.checkBody('country', 'Invalid Country').isString().isLength({ min: 4 });
     req.checkBody('state', 'Invalid State').isString().isLength({ min: 4 });

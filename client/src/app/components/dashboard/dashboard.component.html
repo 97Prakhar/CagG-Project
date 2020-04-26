@@ -1,7 +1,21 @@
-<div *ngIf="user">
+<!-- <div *ngIf="user">
+    <h1>Hello</h1>
     <ul>
         <li>First Name: {{user.firstName}}</li>
         <li>Last Name: {{user.lastName}}</li>        
         <li>Email: {{user.email}}</li>
     </ul>
 </div>
+<app-edit-profile [loggedInUser]="user"></app-edit-profile> -->
+
+<mat-card class="form-align-style" *ngIf="user">
+    <mat-card-title class="title-style">Hello</mat-card-title>
+    <mat-card-content class="form-text-style">
+        <ul>
+            <li>First Name: {{user.firstName}}</li>
+            <li>Last Name: {{user.lastName}}</li>
+            <li>Email: {{user.email}}</li>
+        </ul>
+    </mat-card-content>
+</mat-card>
+<app-edit-profile [loggedInUser]="user"></app-edit-profile>

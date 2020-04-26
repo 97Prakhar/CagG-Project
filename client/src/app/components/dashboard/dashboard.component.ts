@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 
 export class DashboardComponent implements OnInit {
 
-  user: Object;
+  user: Object; //Send it to Edit Profile Component
 
   constructor(private authService: AuthService, private router: Router) { }
 

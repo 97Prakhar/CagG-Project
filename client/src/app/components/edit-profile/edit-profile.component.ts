@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
@@ -13,6 +13,7 @@ import { AuthService } from '../../services/auth/auth.service';
 export class EditProfileComponent implements OnInit {
 
   editProfileForm: FormGroup;
+  @Input('loggedInUser') userDetails: any;
 
   constructor(private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
     this.editProfileForm = new FormGroup({
@@ -29,6 +30,9 @@ export class EditProfileComponent implements OnInit {
   Save() {
     if (this.editProfileForm.valid) {
       const data = {
+        firstName: this.userDetails.firstName,
+        lastName: this.userDetails.lastName,
+        email: this.userDetails.email,
         contact: this.editProfileForm.get('contactFormControl').value,
         country: this.editProfileForm.get('countryFormControl').value,
         state: this.editProfileForm.get('stateFormControl').value,

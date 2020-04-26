@@ -15,7 +15,7 @@ Step 1: Go to "server" folder using command:
 
 cd server
 
-Step 2: Run command:
+Step 2: Run command to start server:
 
 node app.js
 
@@ -25,6 +25,6 @@ Step 1: Go to "client" folder using command:
 
 cd client
 
-Step 2: Run command:
+Step 2: Run command to start Frontend:
 
 ng serve
