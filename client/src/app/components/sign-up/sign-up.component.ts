@@ -34,8 +34,9 @@ export class SignUpComponent implements OnInit {
           firstName: this.signupForm.get('firstNameFormControl').value,
           lastName: this.signupForm.get('lastNameFormControl').value,
           email: this.signupForm.get('emailFormControl').value,
-          password: this.signupForm.get('passwordFormControl').value
-        });
+          password: this.signupForm.get('passwordFormControl').value,
+          confirmPassword: this.signupForm.get('confirmPasswordFormControl').value
+        })
         this.router.navigateByUrl('/login');
       } else {
         this.snackBar.open("Passwords don't match", '', {

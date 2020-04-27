@@ -11,8 +11,6 @@ export class AuthService {
   authToken: any;
   user: any;
 
-  //public jwtHelper: JwtHelperService = new JwtHelperService();
-
   constructor(private http: HttpClient, public jwtHelper: JwtHelperService) { }
 
   registerUser(user) {

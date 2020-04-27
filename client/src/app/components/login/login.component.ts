@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
     this.loginForm = new FormGroup({
-      mailIdFormControl: new FormControl('', [Validators.required, Validators.email]),
+      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
       passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   Login(): any {
     if (this.loginForm.valid) {
       this.authService.logInUser({
-        mailId: this.loginForm.get('mailIdFormControl').value,
+        email: this.loginForm.get('emailFormControl').value,
         password: this.loginForm.get('passwordFormControl').value
       }).subscribe((res: any) => {
         if (res.status) {
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.router.navigateByUrl('/login');
         }
-      });
+      })
     } else {
       if (this.loginForm.get('mailIdFormControl').invalid) {
         this.snackBar.open("Invalid Email Address", '', {

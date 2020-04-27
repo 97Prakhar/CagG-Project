@@ -33,9 +33,9 @@ export class EditProfileComponent implements OnInit {
   Save() {
     if (this.editProfileForm.valid) {
       const data = {
-        firstName: this.userDetails.firstName,
-        lastName: this.userDetails.lastName,
-        email: this.userDetails.email,
+        firstName: this.userDetails.data.firstName,
+        lastName: this.userDetails.data.lastName,
+        email: this.userDetails.data.email,
         contact: this.editProfileForm.get('contactFormControl').value,
         country: this.editProfileForm.get('countryFormControl').value,
         state: this.editProfileForm.get('stateFormControl').value,
