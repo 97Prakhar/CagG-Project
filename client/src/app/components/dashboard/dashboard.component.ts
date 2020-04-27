@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService } from '../../services/auth/auth.service';
-import {Router} from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
+import { DataService } from '../../services/data/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,17 +11,17 @@ import {Router} from '@angular/router';
 
 export class DashboardComponent implements OnInit {
 
-  user: Object; //Send it to Edit Profile Component
+  user: Object;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private dataService: DataService) { }
 
   ngOnInit() {
-    this.authService.getProfile().subscribe((profile:any) => {
+    this.authService.getProfile().subscribe((profile: any) => {
       this.user = profile.user;
-    },
-    err => {
-      console.log(err);
+    }, err => {
       return false;
     });
+
+    this.dataService.userDetails(this.user);
   }
 }

@@ -10,6 +10,6 @@ router.get('/dashboard', passport.authenticate('jwt', { session: false }), (req,
     response.data = req.user;
     res.status(200).send(response);
 });
-router.post('/edit', userController.editUser);
+router.post('/edit', passport.authenticate('jwt', { session: false }), userController.editUser);
 
 module.exports = router;

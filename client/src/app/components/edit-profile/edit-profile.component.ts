@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { DataService } from '../../services/data/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
@@ -13,9 +14,9 @@ import { AuthService } from '../../services/auth/auth.service';
 export class EditProfileComponent implements OnInit {
 
   editProfileForm: FormGroup;
-  @Input('loggedInUser') userDetails: any;
+  userDetails: any;
 
-  constructor(private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
+  constructor(private authService: AuthService, private dataService: DataService, private router: Router, private snackBar: MatSnackBar) {
     this.editProfileForm = new FormGroup({
       contactFormControl: new FormControl('', [Validators.required, Validators.pattern("[0-9]{0-10}")]),
       countryFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -25,7 +26,9 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.dataService.currentUser.subscribe(user => this.userDetails = user)
+  }
 
   Save() {
     if (this.editProfileForm.valid) {
