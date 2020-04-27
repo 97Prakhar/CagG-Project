@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatSelectModule, MatFormFieldModule, MatButtonModule, MatCardModule, MatSnackBarModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { JwtModule } from "@auth0/angular-jwt";
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/authGuard/auth.guard';
 import { DataService } from './services/data/data.service';
@@ -14,6 +15,10 @@ import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -27,7 +32,14 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
   imports: [
     HttpClientModule, BrowserModule, BrowserAnimationsModule,
     AppRoutingModule, FormsModule, ReactiveFormsModule, MatCardModule,
-    MatSelectModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule
+    MatSelectModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["http://localhost:4200/users"]
+//        blacklistedRoutes: ["example.com/examplebadroute/"]
+      }
+    })
   ],
   providers: [AuthService, AuthGuard, DataService],
   bootstrap: [AppComponent]

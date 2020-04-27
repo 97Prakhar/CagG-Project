@@ -11,26 +11,26 @@ export class AuthService {
   authToken: any;
   user: any;
 
-  public jwtHelper: JwtHelperService = new JwtHelperService();
+  //public jwtHelper: JwtHelperService = new JwtHelperService();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public jwtHelper: JwtHelperService) { }
 
   registerUser(user) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/api/register', user, { headers: headers });
+    return this.http.post('http://localhost:3000/users/register', user, { headers: headers });
   }
 
   logInUser(user) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/api/logIn', user, { headers: headers });
+    return this.http.post('http://localhost:3000/users/logIn', user, { headers: headers });
   }
 
   editProfile(data) {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/api/edit', data, { headers: headers });
+    return this.http.post('http://localhost:3000/users/edit', data, { headers: headers });
   }
 
   getProfile() {
@@ -38,7 +38,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3000/api/dashboard', { headers: headers });
+    return this.http.get('http://localhost:3000/users/dashboard', { headers: headers });
   }
 
   storeUserData(token, user) {

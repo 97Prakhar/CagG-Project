@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 
 export class SignUpComponent implements OnInit {
-  
+
   //selectedValue: string;
   signupForm: FormGroup;
 
@@ -19,7 +19,7 @@ export class SignUpComponent implements OnInit {
     this.signupForm = new FormGroup({
       firstNameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
       lastNameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      mailIdFormControl: new FormControl('', [Validators.required, Validators.email]),
+      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
       passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmPasswordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
@@ -27,18 +27,16 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() { }
 
-  SignUp() {
+  SignUp(): any {
     if (this.signupForm.valid) {
-      const user = {
-        firstName: this.signupForm.get('firstNameFormControl').value,
-        lastName: this.signupForm.get('lastNameFormControl').value,
-        mailId: this.signupForm.get('mailIdFormControl').value,
-        password: this.signupForm.get('passwordFormControl').value,
-        confirmPassword: this.signupForm.get('confirmPasswordFormControl').value
-      }
       if (this.signupForm.get('passwordFormControl').value == this.signupForm.get('confirmPasswordFormControl').value) {
-        this.authService.registerUser(user);
-        this.router.navigateByUrl['/login'];
+        this.authService.registerUser({
+          firstName: this.signupForm.get('firstNameFormControl').value,
+          lastName: this.signupForm.get('lastNameFormControl').value,
+          email: this.signupForm.get('emailFormControl').value,
+          password: this.signupForm.get('passwordFormControl').value
+        });
+        this.router.navigateByUrl('/login');
       } else {
         this.snackBar.open("Passwords don't match", '', {
           duration: 1500
@@ -57,7 +55,7 @@ export class SignUpComponent implements OnInit {
         });
       }
 
-      if (this.signupForm.get('mailIdFormControl').invalid) {
+      if (this.signupForm.get('emailFormControl').invalid) {
         this.snackBar.open("Invalid Email Address", '', {
           duration: 1500
         });

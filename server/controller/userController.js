@@ -63,10 +63,8 @@ exports.logIn = (req, res) => {
                             expiresIn: 604800 // 1 week
                         });
                         response.status = true;
-                        response.data = {
-                            token: 'JWT ' + token,
-                            email: data.email
-                        }
+                        response.token = 'JWT ' + token,
+                        response.email = data.email
                         res.status(200).send(response);
                     } else {
                         response.status = false;
