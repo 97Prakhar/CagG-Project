@@ -62,7 +62,6 @@ exports.addUser = (body, callback) => {
 }
 
 exports.editUser = (body, callback) => {
-
     detailsModel.findOneAndUpdate({ email: body.email }, async (err, user) => {
         if (err) callback(err);
         else {

@@ -13,50 +13,54 @@ export class AuthService {
 
   constructor(private http: HttpClient, public jwtHelper: JwtHelperService) { }
 
-  registerUser(user) {
+  registerUser(user): any {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/register', user, { headers: headers });
+    let obs = this.http.post('http://localhost:3000/users/register', user, { headers: headers });
+    return obs;
   }
 
-  logInUser(user) {
+  logInUser(user): any {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/logIn', user, { headers: headers });
+    let obs = this.http.post('http://localhost:3000/users/logIn', user, { headers: headers });
+    return obs;
   }
 
-  editProfile(data) {
+  editProfile(data): any {
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost:3000/users/edit', data, { headers: headers });
+    let obs = this.http.post('http://localhost:3000/users/edit', data, { headers: headers });
+    return obs;
   }
 
-  getProfile() {
+  getProfile(): any {
     let headers = new HttpHeaders();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get('http://localhost:3000/users/dashboard', { headers: headers });
+    let obs = this.http.get('http://localhost:3000/users/dashboard', { headers: headers });
+    return obs;
   }
 
-  storeUserData(token, user) {
+  storeUserData(token, user): any {
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
     this.authToken = token;
     this.user = user;
   }
 
-  loadToken() {
+  loadToken(): any {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
 
-  loggedIn() {
+  loggedIn(): any {
     const token: string = localStorage.getItem('id_token');
     return token != null && !this.jwtHelper.isTokenExpired(token);
   }
 
-  logout() {
+  logout(): any {
     this.authToken = null;
     this.user = null;
     localStorage.clear();

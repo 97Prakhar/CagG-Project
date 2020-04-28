@@ -16,10 +16,6 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
-export function tokenGetter() {
-  return localStorage.getItem("access_token");
-}
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +31,9 @@ export function tokenGetter() {
     MatSelectModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
+        tokenGetter: () => {
+          return localStorage.getItem('id_token');
+        },
         whitelistedDomains: ["http://localhost:4200/users"]
 //        blacklistedRoutes: ["example.com/examplebadroute/"]
       }
