@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
@@ -17,32 +17,53 @@ export class SignUpComponent implements OnInit {
 
   constructor(private router: Router, private authService: AuthService, private snackBar: MatSnackBar) {
     this.signupForm = new FormGroup({
-      firstNameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      lastNameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      emailFormControl: new FormControl('', [Validators.required, Validators.email]),
-      passwordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      confirmPasswordFormControl: new FormControl('', [Validators.required, Validators.minLength(6)])
-    });
+      firstNameFormControl: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+
+      lastNameFormControl: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+
+      emailFormControl: new FormControl('', [
+        Validators.required,
+        Validators.email
+      ]),
+
+      passwordGroup: new FormGroup({
+        passwordFormControl: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+        ]),
+
+        confirmPasswordFormControl: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+        ])
+      }, {
+        validators: matchPassword
+      })
+    })
   }
 
   ngOnInit() { }
 
   SignUp(): any {
     if (this.signupForm.valid) {
-      if (this.signupForm.get('passwordFormControl').value == this.signupForm.get('confirmPasswordFormControl').value) {
-        this.authService.registerUser({
-          firstName: this.signupForm.get('firstNameFormControl').value,
-          lastName: this.signupForm.get('lastNameFormControl').value,
-          email: this.signupForm.get('emailFormControl').value,
-          password: this.signupForm.get('passwordFormControl').value,
-          confirmPassword: this.signupForm.get('confirmPasswordFormControl').value
-        })
-        this.router.navigateByUrl('/login');
-      } else {
-        this.snackBar.open("Passwords don't match", '', {
-          duration: 1500
-        });
-      }
+      let obs = this.authService.registerUser({
+        firstName: this.signupForm.get('firstNameFormControl').value,
+        lastName: this.signupForm.get('lastNameFormControl').value,
+        email: this.signupForm.get('emailFormControl').value,
+        password: this.signupForm.get('passwordGroup').get('passwordFormControl').value,
+        confirmPassword: this.signupForm.get('passwordGroup').get('confirmPasswordFormControl').value
+      });
+      obs.subscribe((response: any) => {
+        if (response.status) {
+          this.router.navigateByUrl('/login');
+        }
+      })
     } else {
       if (this.signupForm.get('firstNameFormControl').invalid) {
         this.snackBar.open("First Name Required and should have at least 4 alphabets", '', {
@@ -68,5 +89,17 @@ export class SignUpComponent implements OnInit {
         });
       }
     }
+  }
+}
+
+function matchPassword(group: AbstractControl): { [key: string]: any } | null {
+  let password = group.get('passwordFormControl');
+  let confirm = group.get('confirmPasswordFormControl');
+
+  if (password.value === confirm.value) return null;
+  else {
+    return {
+      'Passwords do not Match': true
+    };
   }
 }

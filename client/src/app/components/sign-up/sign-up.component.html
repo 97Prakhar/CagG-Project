@@ -13,7 +13,19 @@
             <mat-form-field>
                 <input matInput required placeholder="E-Mail Id" type="email" formControlName="emailFormControl">
             </mat-form-field>
+        </form>
 
+        <!-- <mat-form-field>
+        <mat-label>Role</mat-label>
+        <mat-select [(ngModel)]="selectedValue" formControlName="roleFormControl">
+        <mat-option *ngFor="let role of roles" [value]="role.value">
+        {{role.viewValue}}
+        </mat-option>
+        </mat-select>
+        </mat-form-field> -->
+
+        <form [formGroup]="signupForm">
+            <div [formGroupName]=passwordGroup></div>
             <mat-form-field>
                 <input matInput required placeholder="Password" type="text" formControlName="passwordFormControl">
             </mat-form-field>
@@ -22,17 +34,7 @@
                 <input matInput required placeholder="Confirm Password" type="text"
                     formControlName="confirmPasswordFormControl">
             </mat-form-field>
-
-            <!-- <mat-form-field>
-    <mat-label>Role</mat-label>
-    <mat-select [(ngModel)]="selectedValue" formControlName="roleFormControl">
-    <mat-option *ngFor="let role of roles" [value]="role.value">
-        {{role.viewValue}}
-    </mat-option>
-    </mat-select>
-    </mat-form-field> -->
-
-            <button mat-raised-button type="button" (click)="SignUp()" class="button-style">Sign Up</button>
         </form>
+        <button mat-raised-button type="button" (click)="SignUp()" class="button-style">Sign Up</button>
     </mat-card-content>
 </mat-card>
