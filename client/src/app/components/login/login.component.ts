@@ -27,9 +27,9 @@ export class LoginComponent implements OnInit {
       this.authService.logInUser({
         email: this.loginForm.get('emailFormControl').value,
         password: this.loginForm.get('passwordFormControl').value
-      }).subscribe((res: any) => {
-        if (res.status) {
-          this.authService.storeUserData(res.token, res.email);
+      }).subscribe((response: any) => {
+        if (response.status) {
+          this.authService.storeUserData(response.token, response.email);
           this.router.navigateByUrl('/dashboard');
         } else {
           this.router.navigateByUrl('/login');
