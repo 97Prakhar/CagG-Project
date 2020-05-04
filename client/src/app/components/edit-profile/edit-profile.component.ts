@@ -32,7 +32,7 @@ export class EditProfileComponent implements OnInit {
 
   Save() {
     if (this.editProfileForm.valid) {
-      const data = {
+      this.authService.editProfile({
         firstName: this.userDetails.data.firstName,
         lastName: this.userDetails.data.lastName,
         email: this.userDetails.data.email,
@@ -41,12 +41,18 @@ export class EditProfileComponent implements OnInit {
         state: this.editProfileForm.get('stateFormControl').value,
         technology: this.editProfileForm.get('techFormControl').value,
         //mentor: this.editProfileForm.get('mentorFormControl').value
-      }
-      this.authService.editProfile(data);
-      this.snackBar.open("Profile Data Saved", '', {
-        duration: 1500
-      });
-      this.router.navigateByUrl['/dashboard'];
+      }).subscribe((response: any) => {
+        if (response.status) {
+          this.snackBar.open("Profile Data Saved", '', {
+            duration: 1500
+          });
+          this.router.navigateByUrl['/dashboard'];
+        } else {
+          this.snackBar.open(response.error, '', {
+            duration: 1500
+          });
+        }
+      })
     }
     else {
       if (this.editProfileForm.get('contactFormControl').invalid) {
