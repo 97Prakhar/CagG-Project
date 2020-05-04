@@ -64,7 +64,7 @@ exports.logIn = (req, res) => {
                         });
                         response.status = true;
                         response.token = 'JWT ' + token,
-                        response.email = data.email
+                            response.email = data.email
                         res.status(200).send(response);
                     } else {
                         response.status = false;

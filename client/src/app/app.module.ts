@@ -35,7 +35,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
           return localStorage.getItem('id_token');
         },
         whitelistedDomains: ["http://localhost:4200/users"]
-//        blacklistedRoutes: ["example.com/examplebadroute/"]
+        // blacklistedRoutes: ["example.com/examplebadroute/"]
       }
     })
   ],
