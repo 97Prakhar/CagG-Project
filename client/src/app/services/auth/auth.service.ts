@@ -29,6 +29,7 @@ export class AuthService {
 
   editProfile(data): any {
     let headers = new HttpHeaders();
+    this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     let obs = this.http.post('http://localhost:3000/users/edit', data, { headers: headers });
