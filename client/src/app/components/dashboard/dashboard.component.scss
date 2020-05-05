@@ -2,3 +2,22 @@
     padding-right: 5%;
     padding-left: 5%;
 }
+
+.form-text-style {
+    padding-top: 1%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.button-style {
+    background-color: rgb(66,133,244);
+    color: white;
+    width: 25%;
+    align-self: center;
+}
+
+.title-style {
+    padding-top: 1%;
+    text-align: center;
+}
