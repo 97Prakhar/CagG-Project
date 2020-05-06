@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../services/auth/auth.service';
-import { DataService } from '../../services/data/data.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,11 +13,11 @@ import { Router } from '@angular/router';
 export class EditProfileComponent implements OnInit {
 
   editProfileForm: FormGroup;
-  userDetails: any;
+  user: any;
 
-  constructor(private authService: AuthService, private dataService: DataService, private router: Router, private snackBar: MatSnackBar) {
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
     this.editProfileForm = new FormGroup({
-      contactFormControl: new FormControl('', [Validators.required, Validators.pattern("[0-9]{0-10}")]),
+      contactFormControl: new FormControl('', [Validators.required, Validators.pattern("[0-9]{10}")]),
       countryFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
       stateFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
       techFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -27,15 +26,19 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.currentUser.subscribe(user => this.userDetails = user)
+    this.authService.getProfile().subscribe((response: any) => {
+      this.user = response.data;
+    }, err => {
+      return false;
+    });
   }
 
   Save() {
     if (this.editProfileForm.valid) {
       this.authService.editProfile({
-        firstName: this.userDetails.data.firstName,
-        lastName: this.userDetails.data.lastName,
-        email: this.userDetails.data.email,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        email: this.user.email,
         contact: this.editProfileForm.get('contactFormControl').value,
         country: this.editProfileForm.get('countryFormControl').value,
         state: this.editProfileForm.get('stateFormControl').value,

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.router.navigateByUrl('/login');
         }
-      })
+      });
     } else {
       if (this.loginForm.get('mailIdFormControl').invalid) {
         this.snackBar.open("Invalid Email Address", '', {

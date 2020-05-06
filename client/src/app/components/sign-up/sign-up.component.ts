@@ -32,19 +32,15 @@ export class SignUpComponent implements OnInit {
         Validators.email
       ]),
 
-      passwordGroup: new FormGroup({
-        passwordFormControl: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-        ]),
+      passwordFormControl: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
 
-        confirmPasswordFormControl: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
-        ])
-      }, {
-        validators: matchPassword
-      })
+      confirmPasswordFormControl: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ])
     })
   }
 
@@ -52,18 +48,25 @@ export class SignUpComponent implements OnInit {
 
   SignUp(): any {
     if (this.signupForm.valid) {
-      let obs = this.authService.registerUser({
-        firstName: this.signupForm.get('firstNameFormControl').value,
-        lastName: this.signupForm.get('lastNameFormControl').value,
-        email: this.signupForm.get('emailFormControl').value,
-        password: this.signupForm.get('passwordGroup').get('passwordFormControl').value,
-        confirmPassword: this.signupForm.get('passwordGroup').get('confirmPasswordFormControl').value
-      });
-      obs.subscribe((response: any) => {
-        if (response.status) {
-          this.router.navigateByUrl('/login');
-        }
-      })
+      if (this.signupForm.get('passwordFormControl').value === this.signupForm.get('confirmPasswordFormControl').value) {
+        let obs = this.authService.registerUser({
+          firstName: this.signupForm.get('firstNameFormControl').value,
+          lastName: this.signupForm.get('lastNameFormControl').value,
+          email: this.signupForm.get('emailFormControl').value,
+          password: this.signupForm.get('passwordFormControl').value,
+          confirmPassword: this.signupForm.get('confirmPasswordFormControl').value
+        });
+        obs.subscribe((response: any) => {
+          if (response.status) {
+            this.router.navigateByUrl('/login');
+          }
+        })
+      }
+      else {
+        this.snackBar.open("Passwords doesn't Match", '', {
+          duration: 1500
+        });
+      }
     } else {
       if (this.signupForm.get('firstNameFormControl').invalid) {
         this.snackBar.open("First Name Required and should have at least 4 alphabets", '', {
@@ -88,18 +91,12 @@ export class SignUpComponent implements OnInit {
           duration: 1500
         });
       }
+
+      if (this.signupForm.get('confirmPasswordFormControl').invalid) {
+        this.snackBar.open("Confirm Password is required and should have at least 6 alphabets", '', {
+          duration: 1500
+        });
+      }
     }
-  }
-}
-
-function matchPassword(group: AbstractControl): { [key: string]: any } | null {
-  let password = group.get('passwordFormControl');
-  let confirm = group.get('confirmPasswordFormControl');
-
-  if (password.value === confirm.value) return null;
-  else {
-    return {
-      'Passwords do not Match': true
-    };
   }
 }
