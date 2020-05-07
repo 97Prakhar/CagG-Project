@@ -62,8 +62,25 @@ exports.addUser = (body, callback) => {
 }
 
 exports.editUser = (body, callback) => {
-    detailsModel.findOneAndUpdate({ email: body.email }, async (err, user) => {
+    detailsModel.findOne({ email: body.email }, async (err, user) => {
         if (err) callback(err);
+        else if (user) {
+            detailsModel.updateOne({ email: body.email }, {
+                $set: {
+                    firstName: body.firstName,
+                    lastName: body.lastName,
+                    email: body.email,
+                    contact: body.contact,
+                    country: body.country,
+                    state: body.state,
+                    technology: body.technology,
+                    //mentor: body.mentor
+                }
+            }, { multi: true, new: true }, (err, data) => {
+                if (err) callback(err);
+                else callback(null, data);
+            });
+        }
         else {
             var user = new detailsModel({
                 firstName: body.firstName,

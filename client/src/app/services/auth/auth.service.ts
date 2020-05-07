@@ -35,7 +35,7 @@ export class AuthService {
       'Authorization': this.authToken,
       'Content-Type': 'application/json'
     });
-    let obs = this.http.post('http://localhost:3000/users/edit', data, { headers: headers });
+    let obs = this.http.put('http://localhost:3000/users/edit', data, { headers: headers });
     return obs;
   }
 

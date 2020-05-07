@@ -33,9 +33,9 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  Save() {
+  Save(): any {
     if (this.editProfileForm.valid) {
-      this.authService.editProfile({
+      let obs = this.authService.editProfile({
         firstName: this.user.firstName,
         lastName: this.user.lastName,
         email: this.user.email,
@@ -44,7 +44,8 @@ export class EditProfileComponent implements OnInit {
         state: this.editProfileForm.get('stateFormControl').value,
         technology: this.editProfileForm.get('techFormControl').value,
         //mentor: this.editProfileForm.get('mentorFormControl').value
-      }).subscribe((response: any) => {
+      });
+      obs.subscribe((response: any) => {
         if (response.status) {
           this.snackBar.open("Profile Data Saved", '', {
             duration: 1500

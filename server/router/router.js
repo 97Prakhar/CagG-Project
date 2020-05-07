@@ -4,12 +4,7 @@ const router = require('express').Router();
 
 router.post('/register', userController.register);
 router.post('/logIn', userController.logIn);
-router.get('/dashboard', passport.authenticate('jwt', { session: false }), (req, res, next) => {
-    var response = {}
-    response.status = true;
-    response.data = req.user;
-    res.status(200).send(response);
-});
-router.post('/edit', passport.authenticate('jwt', { session: false }), userController.editUser);
+router.get('/dashboard', passport.authenticate('jwt', { session: false }), userController.dashboard);
+router.put('/edit', passport.authenticate('jwt', { session: false }), userController.editUser);
 
 module.exports = router;

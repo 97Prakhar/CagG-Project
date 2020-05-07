@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { JwtModule } from "@auth0/angular-jwt";
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/authGuard/auth.guard';
-import { DataService } from './services/data/data.service';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
@@ -39,7 +38,7 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
       }
     })
   ],
-  providers: [AuthService, AuthGuard, DataService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 

@@ -82,6 +82,16 @@ exports.logIn = (req, res) => {
 }
 
 /**
+ * Sends current loggenIn User
+*/
+exports.dashboard = (req, res, next) => {
+    var response = {}
+    response.status = true;
+    response.data = req.user;
+    res.status(200).send(response);
+}
+
+/**
  * Required : First Name, Last Name, Email, Contact, Country, State, Technology, Mentor
  * Returns status, data/error
 */
