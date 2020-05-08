@@ -63,7 +63,9 @@ exports.addUser = (body, callback) => {
 
 exports.editUser = (body, callback) => {
     detailsModel.findOne({ email: body.email }, async (err, user) => {
-        if (err) callback(err);
+        if (err) {
+            callback(err);
+        }
         else if (user) {
             detailsModel.updateOne({ email: body.email }, {
                 $set: {
@@ -81,7 +83,7 @@ exports.editUser = (body, callback) => {
                 else callback(null, data);
             });
         }
-        else {
+        else if (!user) {
             var user = new detailsModel({
                 firstName: body.firstName,
                 lastName: body.lastName,

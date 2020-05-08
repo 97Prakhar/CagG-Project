@@ -3,32 +3,32 @@ const mongoose = require("mongoose");
 const detailsSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        required: true,
+        required: true
     },
     lastName: {
         type: String,
-        required: true,
+        required: true
     },
     email: {
         type: String,
-        required: true,
-        unique: true
+        required: true
+        //unique: true
     },
     contact: {
         type: String,
-        required: true,
+        required: true
     },
     country: {
         type: String,
-        required: true,
+        required: true
     },
     state: {
         type: String,
-        required: true,
+        required: true
     },
     technology: {
         type: String,
-        required: true,
+        required: true
     }
     // mentor: {
     //     type: String,

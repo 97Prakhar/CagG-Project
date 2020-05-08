@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { AuthService } from '../../services/auth/auth.service';
@@ -50,7 +50,6 @@ export class EditProfileComponent implements OnInit {
           this.snackBar.open("Profile Data Saved", '', {
             duration: 1500
           });
-          this.router.navigateByUrl['/dashboard'];
         } else {
           this.snackBar.open(response.error, '', {
             duration: 1500

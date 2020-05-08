@@ -84,7 +84,7 @@ exports.logIn = (req, res) => {
 /**
  * Sends current loggenIn User
 */
-exports.dashboard = (req, res, next) => {
+exports.dashboard = (req, res) => {
     var response = {}
     response.status = true;
     response.data = req.user;
