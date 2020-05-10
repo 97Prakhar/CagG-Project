@@ -1,28 +1,31 @@
-<mat-card class="form-align-style">
-    <mat-card-title class="title-style">Edit Profile</mat-card-title>
-    <mat-card-content>
-        <form [formGroup]="editProfileForm" class="form-text-style">
-            <mat-form-field>
-                <input matInput required placeholder="Contact Number" type="text" formControlName="contactFormControl">
-            </mat-form-field>
+<section class="main-style">
+    <mat-card class="form-align-style">
+        <mat-card-title class="title-style">Edit Profile</mat-card-title>
+        <mat-card-content>
+            <form [formGroup]="editProfileForm" class="form-text-style">
+                <mat-form-field>
+                    <input matInput required placeholder="Contact Number" type="text"
+                        formControlName="contactFormControl">
+                </mat-form-field>
 
-            <mat-form-field>
-                <input matInput required placeholder="Country" type="text" formControlName="countryFormControl">
-            </mat-form-field>
+                <mat-form-field>
+                    <input matInput required placeholder="Country" type="text" formControlName="countryFormControl">
+                </mat-form-field>
 
-            <mat-form-field>
-                <input matInput required placeholder="State" type="text" formControlName="stateFormControl">
-            </mat-form-field>
+                <mat-form-field>
+                    <input matInput required placeholder="State" type="text" formControlName="stateFormControl">
+                </mat-form-field>
 
-            <mat-form-field>
-                <input matInput required placeholder="Technology" type="text" formControlName="techFormControl">
-            </mat-form-field>
+                <mat-form-field>
+                    <input matInput required placeholder="Technology" type="text" formControlName="techFormControl">
+                </mat-form-field>
 
-            <!-- <mat-form-field>
+                <!-- <mat-form-field>
                 <input matInput required placeholder="Mentor" type="text" formControlName="mentorFormControl">
             </mat-form-field> -->
 
-            <button mat-raised-button type="submit" (click)="Save()" class="button-style">Save</button>
-        </form>
-    </mat-card-content>
-</mat-card>
+                <button mat-raised-button type="submit" (click)="Save()" class="button-style">Save</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</section>

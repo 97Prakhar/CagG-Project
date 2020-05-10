@@ -1,3 +1,5 @@
+A MEAN Stack Application where user can Register, Login and Edit his details.
+
 # CagG-Project
 # Steps for running the server
 

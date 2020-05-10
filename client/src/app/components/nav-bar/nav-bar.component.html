@@ -4,7 +4,7 @@
     </li>
 
     <li *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a [routerLink]="['/signup']">Sign Up</a>
+        <a [routerLink]="['/register']">Register</a>
     </li>
 
     <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">

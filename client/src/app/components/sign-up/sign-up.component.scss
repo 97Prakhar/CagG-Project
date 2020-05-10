@@ -1,8 +1,12 @@
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+.main-style {
+    width: 90%;
+    padding-left: 5%;
+    padding-top: 5%;
+}
 
 .form-align-style {
-    padding-right: 5%;
-    padding-left: 5%;
+    padding-right: 4%;
+    padding-left: 4%;
 }
 
 .password-text-style {
@@ -28,4 +32,20 @@
 .title-style {
     padding-top: 1%;
     text-align: center;
+}
+
+.name-style {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.name-width {
+    width: 49%;
+}
+
+@media (max-width: 767px) {
+    .name-width {
+      width: 100%;
+    }
 }
