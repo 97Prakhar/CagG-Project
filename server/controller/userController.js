@@ -63,8 +63,8 @@ exports.logIn = (req, res) => {
                             expiresIn: 604800 // 1 week
                         });
                         response.status = true;
-                        response.token = 'JWT ' + token,
-                            response.email = data.email
+                        response.token = 'JWT ' + token;
+                        response.email = data.email;
                         res.status(200).send(response);
                     } else {
                         response.status = false;
@@ -82,13 +82,33 @@ exports.logIn = (req, res) => {
 }
 
 /**
- * Sends current loggenIn User
+ * Sends current loggenIn User from userModel
 */
 exports.dashboard = (req, res) => {
     var response = {}
+
     response.status = true;
     response.data = req.user;
     res.status(200).send(response);
+}
+
+/**
+ * Sends all details of Current User from detailsModel
+*/
+exports.userDetails = (req, res) => {
+    var response = {}
+
+    userServices.userDetails(req.user, (err, data) => {
+        if (err) {
+            response.status = false;
+            response.error = err;
+            res.status(422).send(response);
+        } else {
+            response.status = true;
+            response.data = data;
+            res.status(200).send(response);
+        }
+    });
 }
 
 /**

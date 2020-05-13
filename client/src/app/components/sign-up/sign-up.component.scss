@@ -9,10 +9,9 @@
     padding-left: 4%;
 }
 
-.password-text-style {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.title-style {
+    padding-top: 1%;
+    text-align: center;
 }
 
 .form-text-style {
@@ -29,23 +28,18 @@
     align-self: center;
 }
 
-.title-style {
-    padding-top: 1%;
-    text-align: center;
-}
-
-.name-style {
+.split-style {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.name-width {
+.split-width {
     width: 49%;
 }
 
 @media (max-width: 767px) {
-    .name-width {
+    .split-width {
       width: 100%;
     }
 }

@@ -61,12 +61,24 @@ exports.addUser = (body, callback) => {
     });
 }
 
+exports.userDetails = (body, callback) => {
+    detailsModel.findOne({ email: body.email }, async (err, user) => {
+        if (err) {
+            callback(err);
+        } else if (user) {
+            callback(null, user);
+        } else if (!user) {
+            err = "Add details first";
+            callback(err);
+        }
+    });
+}
+
 exports.editUser = (body, callback) => {
     detailsModel.findOne({ email: body.email }, async (err, user) => {
         if (err) {
             callback(err);
-        }
-        else if (user) {
+        } else if (user) {
             detailsModel.updateOne({ email: body.email }, {
                 $set: {
                     firstName: body.firstName,
@@ -82,8 +94,7 @@ exports.editUser = (body, callback) => {
                 if (err) callback(err);
                 else callback(null, data);
             });
-        }
-        else if (!user) {
+        } else if (!user) {
             var user = new detailsModel({
                 firstName: body.firstName,
                 lastName: body.lastName,

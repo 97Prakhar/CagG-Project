@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   user: any;
+  userDetails: any;
 
   constructor(private authService: AuthService) { }
 
@@ -19,6 +20,11 @@ export class DashboardComponent implements OnInit {
       this.user = response.data;
     }, err => {
       return false;
+    });
+
+    this.authService.userDetails().subscribe((response: any) => {
+      this.userDetails = response.data;
+      console.log(this.userDetails);
     });
   }
 }
