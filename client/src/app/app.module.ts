@@ -11,18 +11,20 @@ import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/authGuard/auth.guard';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { LoginComponent } from './components/login/login.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     LoginComponent,
-    SignUpComponent,
-    DashboardComponent,
-    EditProfileComponent
+    RegisterComponent,
+    ProfileComponent,
+    EditProfileComponent,
+    FooterComponent
   ],
   imports: [
     HttpClientModule, BrowserModule, BrowserAnimationsModule,
@@ -34,7 +36,6 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
           return localStorage.getItem('id_token');
         },
         whitelistedDomains: ["http://localhost:4200/users"]
-        // blacklistedRoutes: ["example.com/examplebadroute/"]
       }
     })
   ],

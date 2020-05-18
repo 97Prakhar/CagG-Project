@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.scss']
 })
 
-export class DashboardComponent implements OnInit {
+export class ProfileComponent implements OnInit {
 
   user: any;
   userDetails: any;
@@ -17,14 +16,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getProfile().subscribe((response: any) => {
-      this.user = response.data;
+      this.user = response;
     }, err => {
       return false;
     });
 
     this.authService.userDetails().subscribe((response: any) => {
-      this.userDetails = response.data;
-      console.log(this.userDetails);
+      this.userDetails = response;
     });
   }
 }

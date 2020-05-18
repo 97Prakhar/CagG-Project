@@ -11,8 +11,8 @@ const detailsSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
-        //unique: true
+        required: true,
+        unique: true
     },
     contact: {
         type: String,
@@ -30,10 +30,6 @@ const detailsSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-    // mentor: {
-    //     type: String,
-    //     required: true,
-    // }
 });
 
 module.exports = mongoose.model('detailsModel', detailsSchema);

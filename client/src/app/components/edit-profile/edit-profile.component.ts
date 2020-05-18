@@ -17,6 +17,8 @@ export class EditProfileComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
     this.editProfileForm = new FormGroup({
+      firstNameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      lastNameFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
       contactFormControl: new FormControl('', [Validators.required, Validators.pattern("[0-9]{10}")]),
       countryFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
       stateFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -36,14 +38,13 @@ export class EditProfileComponent implements OnInit {
   Save(): any {
     if (this.editProfileForm.valid) {
       let obs = this.authService.editProfile({
-        firstName: this.user.firstName,
-        lastName: this.user.lastName,
+        firstName: this.editProfileForm.get('firstNameFormControl').value,
+        lastName: this.editProfileForm.get('lastNameFormControl').value,
         email: this.user.email,
         contact: this.editProfileForm.get('contactFormControl').value,
         country: this.editProfileForm.get('countryFormControl').value,
         state: this.editProfileForm.get('stateFormControl').value,
-        technology: this.editProfileForm.get('techFormControl').value,
-        //mentor: this.editProfileForm.get('mentorFormControl').value
+        technology: this.editProfileForm.get('techFormControl').value
       });
       obs.subscribe((response: any) => {
         if (response.status) {
@@ -81,12 +82,6 @@ export class EditProfileComponent implements OnInit {
           duration: 1500
         });
       }
-
-      // if (this.editProfileForm.get('mentorFormControl').invalid) {
-      //   this.snackBar.open("Invalid Mentor Name", '', {
-      //     duration: 1500
-      //   });
-      // }
     }
   }
 }

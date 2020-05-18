@@ -1,0 +1,19 @@
+<section class="main-style" *ngIf="user.status">
+    <mat-card class="form-align-style">
+        <div *ngIf="userDetails.status">
+            <mat-card-title class="title-style">Welcome {{userDetails.firstName + userDetails.lastName}}</mat-card-title>
+            <mat-card-title class="title-style">Your Details</mat-card-title>
+            <mat-card-content>First Name: {{userDetails.firstName}}</mat-card-content>
+            <mat-card-content>Last Name: {{userDetails.lastName}}</mat-card-content>
+            <mat-card-content>Email: {{userDetails.email}}</mat-card-content>
+            <mat-card-content>Contact: {{userDetails.contact}}</mat-card-content>
+            <mat-card-content>Country: {{userDetails.country}}</mat-card-content>
+            <mat-card-content>State: {{userDetails.state}}</mat-card-content>
+            <mat-card-content>Technology: {{userDetails.technology}}</mat-card-content>
+        </div>
+        <div *ngIf="!userDetails.status">
+            <mat-card-title class="title-style">Welcome {{user.email}}</mat-card-title>
+            <mat-card-title class="title-style">First add your details</mat-card-title>
+        </div>
+    </mat-card>
+</section>

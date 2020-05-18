@@ -9,11 +9,8 @@ const jwt = require('jsonwebtoken');
 exports.register = (req, res) => {
     var response = {}
 
-    req.checkBody('firstName', 'Invalid Name or Length of Name').isString().isLength({ min: 4 });
-    req.checkBody('lastName', 'Invalid Name or Length of Name').isString().isLength({ min: 4 });
     req.checkBody('email', 'Invalid Email Id').isEmail();
     req.checkBody('password', 'Invalid Password Length').isString().isLength({ min: 6 }).equals(req.body.confirmPassword);
-    // req.checkBody('role', 'Invalid Role').isString();
 
     req.getValidationResult().then((err) => {
         if (err.isEmpty()) {
@@ -84,11 +81,11 @@ exports.logIn = (req, res) => {
 /**
  * Sends current loggenIn User from userModel
 */
-exports.dashboard = (req, res) => {
+exports.loggedInUser = (req, res) => {
     var response = {}
 
     response.status = true;
-    response.data = req.user;
+    response.email = req.user.email;
     res.status(200).send(response);
 }
 
@@ -105,7 +102,13 @@ exports.userDetails = (req, res) => {
             res.status(422).send(response);
         } else {
             response.status = true;
-            response.data = data;
+            response.firstName = data.firstName;
+            response.lastName = data.lastName;
+            response.email = data.email;
+            response.contact = data.contact;
+            response.country = data.country;
+            response.state = data.state;
+            response.technology = data.technology;
             res.status(200).send(response);
         }
     });
@@ -125,7 +128,6 @@ exports.editUser = (req, res) => {
     req.checkBody('country', 'Invalid Country').isString().isLength({ min: 4 });
     req.checkBody('state', 'Invalid State').isString().isLength({ min: 4 });
     req.checkBody('technology', 'Invalid Technology').isString().isLength({ min: 4 });
-    //req.checkBody('mentor', 'Invalid Mentor Name').isString().isLength({ min: 4 });
 
     req.getValidationResult().then((err) => {
         if (err.isEmpty()) {

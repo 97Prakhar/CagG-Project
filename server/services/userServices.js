@@ -1,8 +1,6 @@
-const config = require('../config/config');
 const userModel = require('../model/userModel');
 const detailsModel = require('../model/detailsModel');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 async function generatePassword(password) {
     const salt = await bcrypt.genSalt(10);
@@ -29,17 +27,6 @@ exports.getUserByMailId = (email, callback) => {
     });
 }
 
-// exports.getUserByMentor = (mentorName, callback) => {
-//     detailsModel.findOne({ mentorName: mentorName }, async (err, user) => {
-//         if (!user) {
-//             err = "No user under the mentor found"
-//             callback(err);
-//         } else {
-//             callback(null, user);
-//         }
-//     });
-// }
-
 exports.addUser = (body, callback) => {
     userModel.findOne({ email: body.email }, async (err, user) => {
         if (err) callback(err);
@@ -47,11 +34,8 @@ exports.addUser = (body, callback) => {
             callback("Email already taken");
         } else {
             var user = new userModel({
-                firstName: body.firstName,
-                lastName: body.lastName,
                 email: body.email,
                 password: await generatePassword(body.password)
-                // role: body.role
             });
             user.save((err, data) => {
                 if (err) callback(err);
@@ -87,8 +71,7 @@ exports.editUser = (body, callback) => {
                     contact: body.contact,
                     country: body.country,
                     state: body.state,
-                    technology: body.technology,
-                    //mentor: body.mentor
+                    technology: body.technology
                 }
             }, { multi: true, new: true }, (err, data) => {
                 if (err) callback(err);
@@ -102,8 +85,7 @@ exports.editUser = (body, callback) => {
                 contact: body.contact,
                 country: body.country,
                 state: body.state,
-                technology: body.technology,
-                //mentor: body.mentor
+                technology: body.technology
             });
             user.save((err, data) => {
                 if (err) callback(err);

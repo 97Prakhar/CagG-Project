@@ -1,19 +1,28 @@
 .main-style {
-    width: 90%;
-    padding-left: 5%;
     padding-top: 5%;
+    align-content: center;
+    background-color: green;
+    height: 100%;
 }
 
 .form-align-style {
-    padding-right: 4%;
-    padding-left: 4%;
+    width: 75%;
+    border-radius: 10px;
+    margin: auto;
+    background-color: rgb(192, 231, 231);
+}
+
+.title-style {
+    padding-top: 1%;
+    text-align: center;
 }
 
 .form-text-style {
     padding-top: 1%;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
+    margin: auto;
 }
 
 .button-style {
@@ -21,9 +30,16 @@
     color: white;
     width: 25%;
     align-self: center;
+    border-radius: 30px;
 }
 
-.title-style {
-    padding-top: 1%;
-    text-align: center;
+.line-style {
+    border: 0.5px solid grey;
+    width: 45%;
+}
+
+@media (max-width: 767px) {
+    .button-style {
+        width: fit-content;
+    }
 }

@@ -45,7 +45,7 @@ export class AuthService {
       'Authorization': this.authToken,
       'Content-Type': 'application/json'
     });
-    let obs = this.http.get('http://localhost:3000/users/dashboard', { headers: headers });
+    let obs = this.http.get('http://localhost:3000/users/loggedInUser', { headers: headers });
     return obs;
   }
 

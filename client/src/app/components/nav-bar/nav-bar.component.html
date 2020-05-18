@@ -8,14 +8,14 @@
     </li>
 
     <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a [routerLink]="['/dashboard']">Dashboard</a>
+        <a [routerLink]="['/profile']">Profile</a>
     </li>
 
     <li *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-        <a [routerLink]="['/edit']">Edit</a>
+        <a [routerLink]="['/edit']">Edit Profile</a>
     </li>
 
-    <li *ngIf="authService.loggedIn()">
+    <li *ngIf="authService.loggedIn()" style="float: right;">
         <a (click)="onLogoutClick()" href="#">Logout</a>
     </li>
 </ul>
