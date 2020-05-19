@@ -29,6 +29,18 @@ const detailsSchema = new mongoose.Schema({
     technology: {
         type: String,
         required: true
+    },
+    qualification: {
+        type: String,
+        required: true
+    },
+    experience: {
+        type: String,
+        required: true
+    },
+    projects: {
+        type: String,
+        required: true
     }
 });
 

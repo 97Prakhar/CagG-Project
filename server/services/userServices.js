@@ -71,7 +71,10 @@ exports.editUser = (body, callback) => {
                     contact: body.contact,
                     country: body.country,
                     state: body.state,
-                    technology: body.technology
+                    technology: body.technology,
+                    qualification: body.qualification,
+                    experience: body.experience,
+                    projects: body.projects
                 }
             }, { multi: true, new: true }, (err, data) => {
                 if (err) callback(err);
@@ -85,7 +88,10 @@ exports.editUser = (body, callback) => {
                 contact: body.contact,
                 country: body.country,
                 state: body.state,
-                technology: body.technology
+                technology: body.technology,
+                qualification: body.qualification,
+                experience: body.experience,
+                projects: body.projects
             });
             user.save((err, data) => {
                 if (err) callback(err);

@@ -23,13 +23,15 @@ export class EditProfileComponent implements OnInit {
       countryFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
       stateFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
       techFormControl: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      //mentorFormControl: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      qualification: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      experience: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      projects: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
   }
 
   ngOnInit() {
     this.authService.getProfile().subscribe((response: any) => {
-      this.user = response.data;
+      this.user = response;
     }, err => {
       return false;
     });
@@ -44,7 +46,10 @@ export class EditProfileComponent implements OnInit {
         contact: this.editProfileForm.get('contactFormControl').value,
         country: this.editProfileForm.get('countryFormControl').value,
         state: this.editProfileForm.get('stateFormControl').value,
-        technology: this.editProfileForm.get('techFormControl').value
+        technology: this.editProfileForm.get('techFormControl').value,
+        qualification: this.editProfileForm.get('qualFormControl').value,
+        experience: this.editProfileForm.get('expFormControl').value,
+        projects: this.editProfileForm.get('projectFormControl').value
       });
       obs.subscribe((response: any) => {
         if (response.status) {
@@ -66,19 +71,37 @@ export class EditProfileComponent implements OnInit {
       }
 
       if (this.editProfileForm.get('countryFormControl').invalid) {
-        this.snackBar.open("Invalid Country", '', {
+        this.snackBar.open("Invalid Country Details", '', {
           duration: 1500
         });
       }
 
       if (this.editProfileForm.get('stateFormControl').invalid) {
-        this.snackBar.open("Invalid State", '', {
+        this.snackBar.open("Invalid State Details", '', {
           duration: 1500
         });
       }
 
       if (this.editProfileForm.get('techFormControl').invalid) {
-        this.snackBar.open("Invalid Technology", '', {
+        this.snackBar.open("Invalid Technology Details", '', {
+          duration: 1500
+        });
+      }
+
+      if (this.editProfileForm.get('qualFormControl').invalid) {
+        this.snackBar.open("Invalid Qualification Details", '', {
+          duration: 1500
+        });
+      }
+
+      if (this.editProfileForm.get('expFormControl').invalid) {
+        this.snackBar.open("Invalid Experience Details", '', {
+          duration: 1500
+        });
+      }
+
+      if (this.editProfileForm.get('projectFormControl').invalid) {
+        this.snackBar.open("Invalid Project Details", '', {
           duration: 1500
         });
       }

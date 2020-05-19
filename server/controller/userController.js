@@ -90,7 +90,7 @@ exports.loggedInUser = (req, res) => {
 }
 
 /**
- * Sends all details of Current User from detailsModel
+ * Sends all details of Current User from detailsModel along with Status
 */
 exports.userDetails = (req, res) => {
     var response = {}
@@ -109,13 +109,16 @@ exports.userDetails = (req, res) => {
             response.country = data.country;
             response.state = data.state;
             response.technology = data.technology;
+            response.qualification = data.qualification;
+            response.experience = data.experience;
+            response.projects = data.projects;
             res.status(200).send(response);
         }
     });
 }
 
 /**
- * Required : First Name, Last Name, Email, Contact, Country, State, Technology, Mentor
+ * Required : First Name, Last Name, Email, Contact, Country, State, Technology, Qualification, Experience, Project
  * Returns status, data/error
 */
 exports.editUser = (req, res) => {
@@ -125,9 +128,12 @@ exports.editUser = (req, res) => {
     req.checkBody('lastName', 'Invalid Name or Length of Name').isString().isLength({ min: 4 });
     req.checkBody('email', 'Invalid Email Id').isEmail();
     req.checkBody('contact', 'Invalid Contact Number').isString().isLength({ min: 10 });
-    req.checkBody('country', 'Invalid Country').isString().isLength({ min: 4 });
-    req.checkBody('state', 'Invalid State').isString().isLength({ min: 4 });
-    req.checkBody('technology', 'Invalid Technology').isString().isLength({ min: 4 });
+    req.checkBody('country', 'Invalid Country Details').isString().isLength({ min: 4 });
+    req.checkBody('state', 'Invalid State Details').isString().isLength({ min: 4 });
+    req.checkBody('technology', 'Invalid Technology Details').isString().isLength({ min: 4 });
+    req.checkBody('qualification', 'Invalid Qualification Details').isString().isLength({ min: 4 });
+    req.checkBody('experience', 'Invalid Experience Details').isString().isLength({ min: 4 });
+    req.checkBody('projects', 'Invalid Project Details').isString().isLength({ min: 4 });
 
     req.getValidationResult().then((err) => {
         if (err.isEmpty()) {
