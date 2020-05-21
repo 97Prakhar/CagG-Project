@@ -1,12 +1,13 @@
 .main-style {
     padding-top: 5%;
+    padding-bottom: 5%;
     align-content: center;
     background-color: rgb(166, 241, 166);
     height: 100%;
 }
 
 .form-align-style {
-    width: 75%;
+    width: 50%;
     border-radius: 10px;
     margin: auto;
     background-color: rgb(194, 241, 241);
@@ -40,7 +41,11 @@
 }
 
 .split-width {
-    width: 49%;
+    width: 48%;
+}
+
+.line-padding {
+    padding-top: 2%;
 }
 
 .line-style {
@@ -48,12 +53,24 @@
     width: 45%;
 }
 
-@media (max-width: 767px) {
+.a-align {
+    text-align: center;
+    padding-top: 1%;
+    font-weight: bold;
+}
+
+@media (max-width: 720px) {
+    .button-style {
+        width: fit-content;
+    }
+}
+
+@media (max-width: 600px) {
     .split-width {
       width: 100%;
     }
 
-    .button-style {
-        width: fit-content;
+    .form-align-style {
+        width: 80%;
     }
 }
