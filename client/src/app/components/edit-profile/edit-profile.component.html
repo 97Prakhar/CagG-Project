@@ -26,20 +26,48 @@
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input matInput required placeholder="Technology" type="text" formControlName="techFormControl">
+                    <input matInput required placeholder="Qualification" type="text" formControlName="qualFormControl">
                 </mat-form-field>
 
                 <mat-form-field>
-                    <input matInput required placeholder="qualification" type="text" formControlName="qualFormControl">
+                    <input matInput required placeholder="Experience" type="text" formControlName="expFormControl">
                 </mat-form-field>
 
-                <mat-form-field>
-                    <input matInput required placeholder="experience" type="text" formControlName="expFormControl">
-                </mat-form-field>
-
-                <mat-form-field>
-                    <input matInput required placeholder="projects" type="text" formControlName="projectFormControl">
-                </mat-form-field>
+                <div formArrayName="projectFormArray">
+                    <label>Projects</label>
+                    <div *ngFor="let itemrow of editProfileForm.controls.projectFormArray['controls']; let i=index"
+                        [formGroupName]="i" class="projDet">
+                        <mat-form-field>
+                            <input matInput required placeholder="Project Name" type="text" id="projectTitle{{i}}"
+                                formControlName="projectTitle">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Client" type="text" id="client{{i}}"
+                                formControlName="client">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Location" type="text" id="location{{i}}"
+                                formControlName="location">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Description" type="text" id="description{{i}}"
+                                formControlName="description">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Duration" type="text" id="duration{{i}}"
+                                formControlName="duration">
+                        </mat-form-field>
+                        <div>
+                            <button *ngIf="editProfileForm.controls.projectFormArray.controls.length > 1"
+                                (click)="deleteRow(i)" class="btn btn-danger">
+                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" (click)="addProject()" class="btn btn-primary">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+                </div>
 
                 <button mat-raised-button type="submit" (click)="Save()" class="button-style">Save</button>
             </form>

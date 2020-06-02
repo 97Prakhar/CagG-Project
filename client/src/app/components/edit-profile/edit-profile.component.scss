@@ -1,7 +1,9 @@
 .main-style {
-    width: 90%;
-    padding-left: 5%;
     padding-top: 5%;
+    padding-bottom: 5%;
+    align-content: center;
+    background-color: rgb(166, 241, 166);
+    height: fit-content;
 }
 
 .title-style {
@@ -10,15 +12,24 @@
 }
 
 .form-align-style {
-    padding-right: 4%;
-    padding-left: 4%;
+    width: 80%;
+    border-radius: 10px;
+    margin: auto;
+    background-color: rgb(194, 241, 241);
 }
 
 .form-text-style {
     padding-top: 1%;
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90%;
+    margin: auto;
+}
+
+.projDet {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1%;
 }
 
 .button-style {
@@ -27,4 +38,10 @@
     width: 25%;
     align-self: center;
     border-radius: 30px;
+}
+
+@media (max-width: 600px) {
+    .button-style {
+        width: fit-content;
+    }
 }
