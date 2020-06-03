@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
       }).subscribe((response: any) => {
         if (response.status) {
           this.authService.storeUserData(response.token, response.email);
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('/profile');
         } else {
           this.router.navigateByUrl('/login');
         }
