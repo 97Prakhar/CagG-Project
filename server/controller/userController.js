@@ -110,14 +110,14 @@ exports.userDetails = (req, res) => {
             response.state = data.state;
             response.qualification = data.qualification;
             response.experience = data.experience;
-            response.projects = data.projects;
+            response.projectDetails = data.projectDetails;
             res.status(200).send(response);
         }
     });
 }
 
 /**
- * Required : First Name, Last Name, Email, Contact, Country, State, Technology, Qualification, Experience, Project
+ * Required : First Name, Last Name, Email, Contact, Country, State, Qualification, Experience, Project Details
  * Returns status, data/error
 */
 exports.editUser = (req, res) => {

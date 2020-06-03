@@ -31,7 +31,7 @@ exports.addUser = (body, callback) => {
     userModel.findOne({ email: body.email }, async (err, user) => {
         if (err) callback(err);
         if (user) {
-            callback("Email already taken");
+            callback("Email Already Taken");
         } else {
             var user = new userModel({
                 email: body.email,
@@ -52,7 +52,7 @@ exports.userDetails = (body, callback) => {
         } else if (user) {
             callback(null, user);
         } else if (!user) {
-            err = "Add details first";
+            err = "Add Details First";
             callback(err);
         }
     });
@@ -71,10 +71,9 @@ exports.editUser = (body, callback) => {
                     contact: body.contact,
                     country: body.country,
                     state: body.state,
-                    technology: body.technology,
                     qualification: body.qualification,
                     experience: body.experience,
-                    projects: body.projects
+                    projectDetails: body.projectDetails
                 }
             }, { multi: true, new: true }, (err, data) => {
                 if (err) callback(err);
@@ -88,10 +87,9 @@ exports.editUser = (body, callback) => {
                 contact: body.contact,
                 country: body.country,
                 state: body.state,
-                technology: body.technology,
                 qualification: body.qualification,
                 experience: body.experience,
-                projects: body.projects
+                projectDetails: body.projectDetails
             });
             user.save((err, data) => {
                 if (err) callback(err);
