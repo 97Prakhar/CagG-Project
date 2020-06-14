@@ -108,7 +108,7 @@ exports.userDetails = (req, res) => {
             response.contact = data.contact;
             response.country = data.country;
             response.state = data.state;
-            response.qualification = data.qualification;
+            response.education = data.education;
             response.experience = data.experience;
             response.projectDetails = data.projectDetails;
             res.status(200).send(response);
@@ -117,7 +117,7 @@ exports.userDetails = (req, res) => {
 }
 
 /**
- * Required : First Name, Last Name, Email, Contact, Country, State, Qualification, Experience, Project Details
+ * Required : First Name, Last Name, Email, Contact, Country, State, Education, Experience, Project Details
  * Returns status, data/error
 */
 exports.editUser = (req, res) => {
@@ -129,8 +129,9 @@ exports.editUser = (req, res) => {
     req.checkBody('contact', 'Invalid Contact Number').isString().isLength({ min: 10 });
     req.checkBody('country', 'Invalid Country Details').isString().isLength({ min: 4 });
     req.checkBody('state', 'Invalid State Details').isString().isLength({ min: 4 });
-    req.checkBody('qualification', 'Invalid Qualification Details').isString().isLength({ min: 4 });
-    req.checkBody('experience', 'Invalid Experience Details').isString().isLength({ min: 4 });
+    req.checkBody('education', 'Invalid Education Details').not().isEmpty();
+    req.checkBody('experience', 'Invalid Experience Details').not().isEmpty();
+    req.checkBody('projectDetails', 'Invalid Project Details').not().isEmpty();
 
     req.getValidationResult().then((err) => {
         if (err.isEmpty()) {

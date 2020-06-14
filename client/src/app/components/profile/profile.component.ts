@@ -12,17 +12,21 @@ export class ProfileComponent implements OnInit {
   user: any;
   userDetails: any;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+    // this.authService.getProfile().subscribe((response: any) => {
+    //   this.user = response;
+    // }, err => {
+    //   return false;
+    // });
 
-  ngOnInit() {
     this.authService.getProfile().subscribe((response: any) => {
       this.user = response;
-    }, err => {
-      return false;
     });
 
     this.authService.userDetails().subscribe((response: any) => {
       this.userDetails = response;
     });
   }
+
+  ngOnInit() { }
 }

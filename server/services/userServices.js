@@ -71,7 +71,7 @@ exports.editUser = (body, callback) => {
                     contact: body.contact,
                     country: body.country,
                     state: body.state,
-                    qualification: body.qualification,
+                    education: body.education,
                     experience: body.experience,
                     projectDetails: body.projectDetails
                 }
@@ -87,7 +87,7 @@ exports.editUser = (body, callback) => {
                 contact: body.contact,
                 country: body.country,
                 state: body.state,
-                qualification: body.qualification,
+                education: body.education,
                 experience: body.experience,
                 projectDetails: body.projectDetails
             });

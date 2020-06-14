@@ -22,15 +22,19 @@ export class EditProfileComponent implements OnInit {
       contactFormControl: ['', [Validators.required, Validators.pattern("[0-9]{10}")]],
       countryFormControl: ['', [Validators.required, Validators.minLength(4)]],
       stateFormControl: ['', [Validators.required, Validators.minLength(4)]],
-      qualFormControl: ['', [Validators.required, Validators.minLength(4)]],
-      expFormControl: ['', [Validators.required, Validators.minLength(4)]],
+      educationFormArray: this.fb.array([
+        this.initEducationItemRows()
+      ]),
+      experienceFormArray: this.fb.array([
+        this.initExperienceItemRows()
+      ]),
       projectFormArray: this.fb.array([
-        this.initItemRows()
+        this.initProjectItemRows()
       ])
     });
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.authService.getProfile().subscribe((response: any) => {
       this.user = response;
     }, err => {
@@ -38,25 +42,74 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
+  // Education Dynamic Form
+  get educationDetails() {
+    return this.editProfileForm.get('educationFormArray') as FormArray;
+  }
+
+  initEducationItemRows() {
+    return this.fb.group({
+      degree: ['', [Validators.required]],
+      college: ['', [Validators.required, Validators.minLength(4)]],
+      percentage: ['', [Validators.required, Validators.minLength(4)]],
+      fromEducationDate: ['', [Validators.required]],
+      toEducationDate: ['', [Validators.required]]
+    });
+  }
+
+  addEducation() {
+    this.educationDetails.push(this.initEducationItemRows());
+  }
+
+  deleteEducationRow(index: number) {
+    this.educationDetails.removeAt(index);
+  }
+
+  // Experience Dynamic Form
+  get experienceDetails() {
+    return this.editProfileForm.get('experienceFormArray') as FormArray;
+  }
+
+  initExperienceItemRows() {
+    return this.fb.group({
+      organisation: ['', [Validators.required, Validators.minLength(4)]],
+      designation: ['', [Validators.required, Validators.minLength(4)]],
+      location: ['', [Validators.required, Validators.minLength(4)]],
+      description: ['', [Validators.required, Validators.minLength(4)]],
+      fromExperienceDate: ['', [Validators.required]],
+      toExperienceDate: ['', [Validators.required]]
+    });
+  }
+
+  addExperience() {
+    this.experienceDetails.push(this.initExperienceItemRows());
+  }
+
+  deleteExperienceRow(index: number) {
+    this.experienceDetails.removeAt(index);
+  }
+
+  // Project Dynamic Form
   get projects() {
     return this.editProfileForm.get('projectFormArray') as FormArray;
   }
 
-  initItemRows() {
+  initProjectItemRows() {
     return this.fb.group({
       projectTitle: ['', [Validators.required, Validators.minLength(4)]],
       client: ['', [Validators.required, Validators.minLength(4)]],
       location: ['', [Validators.required, Validators.minLength(4)]],
       description: ['', [Validators.required, Validators.minLength(4)]],
-      duration: ['', [Validators.required]]
+      fromProjectDate: ['', [Validators.required]],
+      toProjectDate: ['', [Validators.required]]
     });
   }
 
   addProject() {
-    this.projects.push(this.initItemRows());
+    this.projects.push(this.initProjectItemRows());
   }
 
-  deleteRow(index: number) {
+  deleteProjectRow(index: number) {
     this.projects.removeAt(index);
   }
 
@@ -69,9 +122,9 @@ export class EditProfileComponent implements OnInit {
         contact: this.editProfileForm.get('contactFormControl').value,
         country: this.editProfileForm.get('countryFormControl').value,
         state: this.editProfileForm.get('stateFormControl').value,
-        qualification: this.editProfileForm.get('qualFormControl').value,
-        experience: this.editProfileForm.get('expFormControl').value,
-        projectDetails: this.editProfileForm.get('projectFormArray').value
+        education: this.editProfileForm.get('educationFormArray').value,
+        experience: this.editProfileForm.get('experienceFormArray').value,
+        projectDetails: this.editProfileForm.get('projectFormArray').value,
       });
       obs.subscribe((response: any) => {
         if (response.status) {
@@ -116,14 +169,20 @@ export class EditProfileComponent implements OnInit {
         });
       }
 
-      if (this.editProfileForm.get('qualFormControl').invalid) {
-        this.snackBar.open("Invalid Qualification Details", '', {
+      if (this.editProfileForm.get('educationFormArray').invalid) {
+        this.snackBar.open("Invalid Education Details", '', {
           duration: 1500
         });
       }
 
-      if (this.editProfileForm.get('expFormControl').invalid) {
+      if (this.editProfileForm.get('experienceFormArray').invalid) {
         this.snackBar.open("Invalid Experience Details", '', {
+          duration: 1500
+        });
+      }
+
+      if (this.editProfileForm.get('projectFormArray').invalid) {
+        this.snackBar.open("Invalid Project Details", '', {
           duration: 1500
         });
       }

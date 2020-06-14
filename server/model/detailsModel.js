@@ -26,12 +26,12 @@ const detailsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    qualification: {
-        type: String,
+    education: {
+        type: Array,
         required: true
     },
     experience: {
-        type: String,
+        type: Array,
         required: true
     },
     projectDetails: {
