@@ -1,7 +1,8 @@
 <section class="main-style">
     <mat-card class="form-align-style">
         <div *ngIf="userDetails; else elseBlock">
-            <mat-card-title class="title-style">Welcome {{userDetails.firstName + userDetails.lastName}}</mat-card-title>
+            <mat-card-title class="title-style">Welcome {{userDetails.firstName + userDetails.lastName}}
+            </mat-card-title>
             <mat-card-title class="title-style">Your Details</mat-card-title>
             <mat-card-content>First Name: {{userDetails.firstName}}</mat-card-content>
             <mat-card-content>Last Name: {{userDetails.lastName}}</mat-card-content>
@@ -9,10 +10,85 @@
             <mat-card-content>Contact: {{userDetails.contact}}</mat-card-content>
             <mat-card-content>Country: {{userDetails.country}}</mat-card-content>
             <mat-card-content>State: {{userDetails.state}}</mat-card-content>
-            <mat-card-content>Technology: {{userDetails.technology}}</mat-card-content>
-            <mat-card-content>Education: {{userDetails.education}}</mat-card-content>
-            <mat-card-content>Experience: {{userDetails.experience}}</mat-card-content>
-            <mat-card-content>Projects: {{userDetails.projectDetails}}</mat-card-content>
+
+            <!-- Education Table -->
+            <mat-card-content>Education Details</mat-card-content>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Degree</th>
+                            <th>College</th>
+                            <th>Percentage</th>
+                            <th>From</th>
+                            <th>To</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let edu of userDetails.education; let i = index">
+                        <tr>
+                            <td>{{edu.degree}}</td>
+                            <td>{{edu.college}}</td>
+                            <td>{{edu.percentage}}</td>
+                            <td>{{edu.fromEducationDate}}</td>
+                            <td>{{edu.toEducationDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Experience Table -->
+            <mat-card-content style="padding-top: 1%;">Experience Details</mat-card-content>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Organisation</th>
+                            <th>Designation</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>From</th>
+                            <th>To</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let exp of userDetails.experience; let i = index">
+                        <tr>
+                            <td>{{exp.organisation}}</td>
+                            <td>{{exp.designation}}</td>
+                            <td>{{exp.location}}</td>
+                            <td>{{exp.description}}</td>
+                            <td>{{exp.fromExperienceDate}}</td>
+                            <td>{{exp.toExperienceDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Projects Table -->
+            <mat-card-content style="padding-top: 1%;">Projects Details</mat-card-content>
+            <div style="overflow-x:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project Title</th>
+                            <th>Client</th>
+                            <th>Location</th>
+                            <th>Description</th>
+                            <th>From</th>
+                            <th>To</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let proj of userDetails.projectDetails; let i = index">
+                        <tr>
+                            <td>{{proj.projectTitle}}</td>
+                            <td>{{proj.client}}</td>
+                            <td>{{proj.location}}</td>
+                            <td>{{proj.description}}</td>
+                            <td>{{proj.fromProjectDate}}</td>
+                            <td>{{proj.toProjectDate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <ng-template #elseBlock>
             <mat-card-title class="title-style">Welcome {{user.email}}</mat-card-title>

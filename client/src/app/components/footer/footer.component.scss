@@ -37,10 +37,12 @@ footer {
     color:  #ffffff;
     font: normal 36px 'Cookie', cursive;
     margin: 0;
+    display: inline-block;
 }
 
 .footer-distributed h3 span {
     color: #5383d3;
+    display: inline-block;
 }
 
 .footer-distributed .footer-links {
@@ -221,6 +223,10 @@ footer {
     transition: .1s;
     -webkit-transition: .1s;
     -moz-transition: .1s;
+}
+
+.contain {
+    padding-top: 1%
 }
 
 .clearfix {

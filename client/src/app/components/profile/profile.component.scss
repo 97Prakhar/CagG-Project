@@ -2,14 +2,30 @@
     width: 90%;
     padding-left: 5%;
     padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 .form-align-style {
     padding-right: 4%;
     padding-left: 4%;
+    padding-bottom: 2%;
 }
 
 .title-style {
     padding-top: 1%;
     text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    text-align: center;
+    padding: 6px;
 }
