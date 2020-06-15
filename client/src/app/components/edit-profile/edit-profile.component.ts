@@ -188,42 +188,4 @@ export class EditProfileComponent implements OnInit {
       }
     }
   }
-
-  // Save() {
-  //   const user = {
-  //     firstName: this.editProfileForm.get('firstNameFormControl').value,
-  //     lastName: this.editProfileForm.get('lastNameFormControl').value,
-  //     contact: this.editProfileForm.get('contactFormControl').value,
-  //     country: this.editProfileForm.get('countryFormControl').value,
-  //     state: this.editProfileForm.get('stateFormControl').value,
-  //     qualification: this.editProfileForm.get('qualFormControl').value,
-  //     experience: this.editProfileForm.get('expFormControl').value,
-  //     projectDetails: this.editProfileForm.get('projectFormArray').value,
-  //   }
-
-  //   console.log(user);
-
-  //   for (let control of this.projects.controls) {
-  //     for (let control of this.projects.value) {
-  //       console.log({
-  //         projectTitle: this.editProfileForm.get(['projectFormArray', 'control']).get('projectTitle').value,
-  //         client: this.editProfileForm.get(['projectFormArray', 'control']).get('client').value,
-  //         location: this.editProfileForm.get(['projectFormArray', 'control']).get('location').value,
-  //         description: this.editProfileForm.get(['projectFormArray', 'control']).get('description').value,
-  //         duration: this.editProfileForm.get(['projectFormArray', 'control']).get('duration').value,
-  //       });
-  //     }
-  //   }
-
-  //   console.log(this.projects.value);
-  //   console.log(this.editProfileForm.value.projectFormArray.length);
-  //   console.log(this.editProfileForm.get(['projectFormArray', '0']).get('projectTitle').value);
-  //   console.log({
-  //     projectTitle: this.editProfileForm.get(['projectFormArray', '0']).get('projectTitle').value,
-  //     client: this.editProfileForm.get(['projectFormArray', '0']).get('client').value,
-  //     location: this.editProfileForm.get(['projectFormArray', '0']).get('location').value,
-  //     description: this.editProfileForm.get(['projectFormArray', '0']).get('description').value,
-  //     duration: this.editProfileForm.get(['projectFormArray', '0']).get('duration').value,
-  //   });
-  // }
 }

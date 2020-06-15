@@ -13,12 +13,6 @@ export class ProfileComponent implements OnInit {
   userDetails: any;
 
   constructor(private authService: AuthService) {
-    // this.authService.getProfile().subscribe((response: any) => {
-    //   this.user = response;
-    // }, err => {
-    //   return false;
-    // });
-
     this.authService.getProfile().subscribe((response: any) => {
       this.user = response;
     });

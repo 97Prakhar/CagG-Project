@@ -25,17 +25,10 @@
 
         <!-- Education Details Dynamic Form -->
         <mat-card class="card-style">
-            <!-- Dynamic Education Form with fields
-                Study Type Dropdown (10th, 12th, Graduation, Post Graduation, PhD),
-                Specialisation (If 10th, Hide Specialisation), College Name, Percentage -->
             <div formArrayName="educationFormArray">
                 <label>Education</label>
                 <div *ngFor="let itemrow of editProfileForm.controls.educationFormArray['controls']; let i=index"
                     [formGroupName]="i" class="dynamic-form">
-                    <!-- <mat-form-field>
-                            <input matInput required placeholder="Specialisation" type="text" id="specialisation{{i}}"
-                                formControlName="specialisation">
-                        </mat-form-field> -->
                     <mat-form-field>
                         <mat-label>Degree</mat-label>
                         <mat-select required [(value)]="selected" id="degree{{i}}" formControlName="degree">
@@ -54,10 +47,6 @@
                         <input matInput required placeholder="Percentage" type="text" id="percentage{{i}}"
                             formControlName="percentage">
                     </mat-form-field>
-                    <!-- <mat-form-field>
-                            <input matInput required placeholder="Duration" type="text" id="duration{{i}}"
-                                formControlName="duration">
-                        </mat-form-field> -->
                     <mat-form-field>
                         <input required matInput [matDatepicker]="fromEducationPicker" placeholder="From"
                             id="fromEducationDate{{i}}" formControlName="fromEducationDate">
@@ -85,8 +74,6 @@
 
         <!-- Experience Details Dynamic Form -->
         <mat-card class="card-style">
-            <!-- Dynamic Experience Form with fields as follows Organisation, Designation, Location, Description,
-                Duration (From To) -->
             <div formArrayName="experienceFormArray">
                 <label>Experience</label>
                 <div *ngFor="let itemrow of editProfileForm.controls.experienceFormArray['controls']; let i=index"
@@ -107,10 +94,6 @@
                         <input matInput required placeholder="Description" type="text" id="description{{i}}"
                             formControlName="description">
                     </mat-form-field>
-                    <!-- <mat-form-field>
-                            <input matInput required placeholder="Duration" type="text" id="duration{{i}}"
-                                formControlName="duration">
-                        </mat-form-field> -->
                     <mat-form-field>
                         <input required matInput [matDatepicker]="fromExperiencePicker" placeholder="From"
                             id="fromExperienceDate{{i}}" formControlName="fromExperienceDate">
@@ -158,10 +141,6 @@
                         <input matInput required placeholder="Description" type="text" id="description{{i}}"
                             formControlName="description">
                     </mat-form-field>
-                    <!-- <mat-form-field>
-                            <input matInput required placeholder="Duration" type="text" id="duration{{i}}"
-                                formControlName="duration">
-                        </mat-form-field> -->
                     <mat-form-field>
                         <input required matInput [matDatepicker]="fromProjectPicker" placeholder="From"
                             id="fromProjectDate{{i}}" formControlName="fromProjectDate">
