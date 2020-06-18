@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatSelectModule, MatFormFieldModule, MatButtonModule, MatCardModule, MatSnackBarModule,
-  MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+  MatDatepickerModule, MatNativeDateModule, MatExpansionModule } from '@angular/material';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { JwtModule } from "@auth0/angular-jwt";
@@ -31,7 +31,7 @@ import { FooterComponent } from './components/footer/footer.component';
     HttpClientModule, BrowserModule, BrowserAnimationsModule,
     AppRoutingModule, FormsModule, ReactiveFormsModule, MatCardModule,
     MatSelectModule, MatInputModule, MatFormFieldModule, MatButtonModule,
-    MatSnackBarModule, MatDatepickerModule, MatNativeDateModule,
+    MatSnackBarModule, MatDatepickerModule, MatNativeDateModule, MatExpansionModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

@@ -14,6 +14,7 @@ export class EditProfileComponent implements OnInit {
 
   editProfileForm: FormGroup;
   user: any;
+  userDetails: any;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
     this.editProfileForm = this.fb.group({
@@ -32,14 +33,28 @@ export class EditProfileComponent implements OnInit {
         this.initProjectItemRows()
       ])
     });
+
+    this.authService.getProfile().subscribe((response: any) => {
+      this.user = response;
+    });
+
+    this.authService.userDetails().subscribe((response: any) => {
+      this.userDetails = response;
+    });
   }
 
   ngOnInit() {
-    this.authService.getProfile().subscribe((response: any) => {
-      this.user = response;
-    }, err => {
-      return false;
+    this.editProfileForm.patchValue({
+      "firstNameFormControl": this.userDetails.firstName,
+      "lastNameFormControl": this.userDetails.lastName,
+      "contactFormControl": this.userDetails.contact,
+      "countryFormControl": this.userDetails.country,
+      "stateFormControl": this.userDetails.state,
+      "educationFormArray": this.userDetails.education,
+      "experienceFormArray": this.userDetails.experience,
+      "projectFormArray": this.userDetails.projectDetails,
     });
+    //Loop for entire lengths of 3 Arrays
   }
 
   // Education Dynamic Form

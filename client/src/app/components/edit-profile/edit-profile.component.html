@@ -1,173 +1,197 @@
 <section class="main-style">
     <p class="title-style">Edit Profile</p>
     <form [formGroup]="editProfileForm">
-        <mat-card class="card-style">
-            <mat-form-field>
-                <input matInput required placeholder="First Name" type="text" formControlName="firstNameFormControl">
-            </mat-form-field>
-
-            <mat-form-field>
-                <input matInput required placeholder="Last Name" type="text" formControlName="lastNameFormControl">
-            </mat-form-field>
-
-            <mat-form-field>
-                <input matInput required placeholder="Contact Number" type="text" formControlName="contactFormControl">
-            </mat-form-field>
-
-            <mat-form-field>
-                <input matInput required placeholder="Country" type="text" formControlName="countryFormControl">
-            </mat-form-field>
-
-            <mat-form-field>
-                <input matInput required placeholder="State" type="text" formControlName="stateFormControl">
-            </mat-form-field>
-        </mat-card>
-
-        <!-- Education Details Dynamic Form -->
-        <mat-card class="card-style">
-            <div formArrayName="educationFormArray">
-                <label>Education</label>
-                <div *ngFor="let itemrow of editProfileForm.controls.educationFormArray['controls']; let i=index"
-                    [formGroupName]="i" class="dynamic-form">
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Basic Information
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="card-style">
                     <mat-form-field>
-                        <mat-label>Degree</mat-label>
-                        <mat-select required [(value)]="selected" id="degree{{i}}" formControlName="degree">
-                            <mat-option value="Class 10th">Class 10th</mat-option>
-                            <mat-option value="Class 12th">Class 12th</mat-option>
-                            <mat-option value="Graduation">Graduation</mat-option>
-                            <mat-option value="Post Graduation">Post Graduation</mat-option>
-                            <mat-option value="PhD">PhD</mat-option>
-                        </mat-select>
+                        <input matInput required placeholder="First Name" type="text"
+                            formControlName="firstNameFormControl">
                     </mat-form-field>
+
                     <mat-form-field>
-                        <input matInput required placeholder="College" type="text" id="college{{i}}"
-                            formControlName="college">
+                        <input matInput required placeholder="Last Name" type="text"
+                            formControlName="lastNameFormControl">
                     </mat-form-field>
+
                     <mat-form-field>
-                        <input matInput required placeholder="Percentage" type="text" id="percentage{{i}}"
-                            formControlName="percentage">
+                        <input matInput required placeholder="Contact Number" type="text"
+                            formControlName="contactFormControl">
                     </mat-form-field>
+
                     <mat-form-field>
-                        <input required matInput [matDatepicker]="fromEducationPicker" placeholder="From"
-                            id="fromEducationDate{{i}}" formControlName="fromEducationDate">
-                        <mat-datepicker-toggle matSuffix [for]="fromEducationPicker"></mat-datepicker-toggle>
-                        <mat-datepicker #fromEducationPicker></mat-datepicker>
+                        <input matInput required placeholder="Country" type="text" formControlName="countryFormControl">
                     </mat-form-field>
+
                     <mat-form-field>
-                        <input required matInput [matDatepicker]="toEducationPicker" placeholder="To"
-                            id="toEducationDate{{i}}" formControlName="toEducationDate">
-                        <mat-datepicker-toggle matSuffix [for]="toEducationPicker"></mat-datepicker-toggle>
-                        <mat-datepicker #toEducationPicker></mat-datepicker>
+                        <input matInput required placeholder="State" type="text" formControlName="stateFormControl">
                     </mat-form-field>
-                    <div>
-                        <button *ngIf="editProfileForm.controls.educationFormArray.controls.length > 1"
-                            (click)="deleteEducationRow(i)" class="btn btn-danger">
-                            <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                        </button>
-                    </div>
                 </div>
-                <button type="button" (click)="addEducation()" class="btn btn-primary">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                </button>
-            </div>
-        </mat-card>
+            </mat-expansion-panel>
 
-        <!-- Experience Details Dynamic Form -->
-        <mat-card class="card-style">
-            <div formArrayName="experienceFormArray">
-                <label>Experience</label>
-                <div *ngFor="let itemrow of editProfileForm.controls.experienceFormArray['controls']; let i=index"
-                    [formGroupName]="i" class="dynamic-form">
-                    <mat-form-field>
-                        <input matInput required placeholder="Organisation" type="text" id="organisation{{i}}"
-                            formControlName="organisation">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput required placeholder="Designation" type="text" id="designation{{i}}"
-                            formControlName="designation">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput required placeholder="Location" type="text" id="location{{i}}"
-                            formControlName="location">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput required placeholder="Description" type="text" id="description{{i}}"
-                            formControlName="description">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input required matInput [matDatepicker]="fromExperiencePicker" placeholder="From"
-                            id="fromExperienceDate{{i}}" formControlName="fromExperienceDate">
-                        <mat-datepicker-toggle matSuffix [for]="fromExperiencePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #fromExperiencePicker></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input required matInput [matDatepicker]="toExperiencePicker" placeholder="To"
-                            id="toExperienceDate{{i}}" formControlName="toExperienceDate">
-                        <mat-datepicker-toggle matSuffix [for]="toExperiencePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #toExperiencePicker></mat-datepicker>
-                    </mat-form-field>
-                    <div>
-                        <button *ngIf="editProfileForm.controls.experienceFormArray.controls.length > 1"
-                            (click)="deleteExperienceRow(i)" class="btn btn-danger">
-                            <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                        </button>
+            <!-- Education Details Dynamic Form -->
+            <div formArrayName="educationFormArray" style="padding-top: 1%;">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Education
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let itemrow of editProfileForm.controls.educationFormArray['controls']; let i=index"
+                        [formGroupName]="i" class="dynamic-form">
+                        <mat-form-field>
+                            <mat-label>Degree</mat-label>
+                            <mat-select required [(value)]="selected" id="degree{{i}}" formControlName="degree">
+                                <mat-option value="Class 10th">Class 10th</mat-option>
+                                <mat-option value="Class 12th">Class 12th</mat-option>
+                                <mat-option value="Graduation">Graduation</mat-option>
+                                <mat-option value="Post Graduation">Post Graduation</mat-option>
+                                <mat-option value="PhD">PhD</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="College" type="text" id="college{{i}}"
+                                formControlName="college">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Percentage" type="text" id="percentage{{i}}"
+                                formControlName="percentage">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input required matInput [matDatepicker]="fromEducationPicker" placeholder="From"
+                                id="fromEducationDate{{i}}" formControlName="fromEducationDate">
+                            <mat-datepicker-toggle matSuffix [for]="fromEducationPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #fromEducationPicker></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input required matInput [matDatepicker]="toEducationPicker" placeholder="To"
+                                id="toEducationDate{{i}}" formControlName="toEducationDate">
+                            <mat-datepicker-toggle matSuffix [for]="toEducationPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #toEducationPicker></mat-datepicker>
+                        </mat-form-field>
+                        <div>
+                            <button *ngIf="editProfileForm.controls.educationFormArray.controls.length > 1"
+                                (click)="deleteEducationRow(i)" class="btn btn-danger">
+                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <button type="button" (click)="addExperience()" class="btn btn-primary">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                </button>
+                    <button type="button" (click)="addEducation()" class="btn btn-primary">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+                </mat-expansion-panel>
             </div>
-        </mat-card>
 
-        <!-- Project Details Dynamic Form -->
-        <mat-card class="card-style">
-            <div formArrayName="projectFormArray">
-                <label>Projects</label>
-                <div *ngFor="let itemrow of editProfileForm.controls.projectFormArray['controls']; let i=index"
-                    [formGroupName]="i" class="dynamic-form">
-                    <mat-form-field>
-                        <input matInput required placeholder="Project Name" type="text" id="projectTitle{{i}}"
-                            formControlName="projectTitle">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput required placeholder="Client" type="text" id="client{{i}}"
-                            formControlName="client">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput required placeholder="Location" type="text" id="location{{i}}"
-                            formControlName="location">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input matInput required placeholder="Description" type="text" id="description{{i}}"
-                            formControlName="description">
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input required matInput [matDatepicker]="fromProjectPicker" placeholder="From"
-                            id="fromProjectDate{{i}}" formControlName="fromProjectDate">
-                        <mat-datepicker-toggle matSuffix [for]="fromProjectPicker"></mat-datepicker-toggle>
-                        <mat-datepicker #fromProjectPicker></mat-datepicker>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <input required matInput [matDatepicker]="toProjectPicker" placeholder="To"
-                            id="toProjectDate{{i}}" formControlName="toProjectDate">
-                        <mat-datepicker-toggle matSuffix [for]="toProjectPicker"></mat-datepicker-toggle>
-                        <mat-datepicker #toProjectPicker></mat-datepicker>
-                    </mat-form-field>
-                    <div>
-                        <button *ngIf="editProfileForm.controls.projectFormArray.controls.length > 1"
-                            (click)="deleteProjectRow(i)" class="btn btn-danger">
-                            <i class="fa fa-minus-circle" aria-hidden="true"></i>
-                        </button>
+            <!-- Experience Details Dynamic Form -->
+            <div formArrayName="experienceFormArray" style="padding-top: 1%;">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Experience
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let itemrow of editProfileForm.controls.experienceFormArray['controls']; let i=index"
+                        [formGroupName]="i" class="dynamic-form">
+                        <mat-form-field>
+                            <input matInput required placeholder="Organisation" type="text" id="organisation{{i}}"
+                                formControlName="organisation">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Designation" type="text" id="designation{{i}}"
+                                formControlName="designation">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Location" type="text" id="location{{i}}"
+                                formControlName="location">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Description" type="text" id="description{{i}}"
+                                formControlName="description">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input required matInput [matDatepicker]="fromExperiencePicker" placeholder="From"
+                                id="fromExperienceDate{{i}}" formControlName="fromExperienceDate">
+                            <mat-datepicker-toggle matSuffix [for]="fromExperiencePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #fromExperiencePicker></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input required matInput [matDatepicker]="toExperiencePicker" placeholder="To"
+                                id="toExperienceDate{{i}}" formControlName="toExperienceDate">
+                            <mat-datepicker-toggle matSuffix [for]="toExperiencePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #toExperiencePicker></mat-datepicker>
+                        </mat-form-field>
+                        <div>
+                            <button *ngIf="editProfileForm.controls.experienceFormArray.controls.length > 1"
+                                (click)="deleteExperienceRow(i)" class="btn btn-danger">
+                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <button type="button" (click)="addProject()" class="btn btn-primary">
-                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                </button>
+                    <button type="button" (click)="addExperience()" class="btn btn-primary">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+                </mat-expansion-panel>
             </div>
-        </mat-card>
 
-        <div class="button-alignment">
-            <button mat-raised-button type="submit" (click)="Save()" class="button-style">Save</button>
-        </div>
+            <!-- Project Details Dynamic Form -->
+            <div formArrayName="projectFormArray" style="padding-top: 1%;">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Projects
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let itemrow of editProfileForm.controls.projectFormArray['controls']; let i=index"
+                        [formGroupName]="i" class="dynamic-form">
+                        <mat-form-field>
+                            <input matInput required placeholder="Project Name" type="text" id="projectTitle{{i}}"
+                                formControlName="projectTitle">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Client" type="text" id="client{{i}}"
+                                formControlName="client">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Location" type="text" id="location{{i}}"
+                                formControlName="location">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input matInput required placeholder="Description" type="text" id="description{{i}}"
+                                formControlName="description">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input required matInput [matDatepicker]="fromProjectPicker" placeholder="From"
+                                id="fromProjectDate{{i}}" formControlName="fromProjectDate">
+                            <mat-datepicker-toggle matSuffix [for]="fromProjectPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #fromProjectPicker></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input required matInput [matDatepicker]="toProjectPicker" placeholder="To"
+                                id="toProjectDate{{i}}" formControlName="toProjectDate">
+                            <mat-datepicker-toggle matSuffix [for]="toProjectPicker"></mat-datepicker-toggle>
+                            <mat-datepicker #toProjectPicker></mat-datepicker>
+                        </mat-form-field>
+                        <div>
+                            <button *ngIf="editProfileForm.controls.projectFormArray.controls.length > 1"
+                                (click)="deleteProjectRow(i)" class="btn btn-danger">
+                                <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="button" (click)="addProject()" class="btn btn-primary">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+                </mat-expansion-panel>
+            </div>
+
+            <div class="button-alignment">
+                <button mat-raised-button type="submit" (click)="Save()" class="button-style">Save</button>
+            </div>
+        </mat-accordion>
     </form>
 </section>

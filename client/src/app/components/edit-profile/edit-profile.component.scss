@@ -2,7 +2,6 @@
     padding-top: 3%;
     padding-bottom: 5%;
     align-content: center;
-    background-color: rgb(166, 241, 166);
     height: fit-content;
 }
 
@@ -12,20 +11,21 @@
 }
 
 .card-style {
-    padding-top: 2%;
-    padding-bottom: 2%;
     display: flex;
     flex-direction: column;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1%;
-    border-radius: 12px;
 }
 
-.mat-form-field {
+.mat-expansion-panel {
     width: 95%;
     margin: auto;
+}
+
+.mat-expansion-panel-header {
+    background-color: rgba(233, 220, 220, 0.911);
+}
+
+.mat-expansion-panel-header:hover {
+    background-color: rgba(168, 158, 158, 0.911);
 }
 
 .dynamic-form {
