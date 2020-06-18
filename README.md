@@ -1,6 +1,6 @@
-A MEAN Stack Application where user can Register, Login, View and Edit his/her details.
-
 # CagG-Project
+A MEAN Stack Application where user can Register, Login, View and Edit their education & professional details.
+
 # Steps for running the server
 
 Step 1: Go to bin folder inside MongoDB folder where MongoDB is installed on system using command:

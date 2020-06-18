@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
@@ -17,6 +17,14 @@ export class EditProfileComponent implements OnInit {
   userDetails: any;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
+    this.authService.getProfile().subscribe((response: any) => {
+      this.user = response;
+    });
+
+    this.authService.userDetails().subscribe((response: any) => {
+      this.userDetails = response;
+    });
+
     this.editProfileForm = this.fb.group({
       firstNameFormControl: ['', [Validators.required, Validators.minLength(4)]],
       lastNameFormControl: ['', [Validators.required, Validators.minLength(4)]],
@@ -33,14 +41,6 @@ export class EditProfileComponent implements OnInit {
         this.initProjectItemRows()
       ])
     });
-
-    this.authService.getProfile().subscribe((response: any) => {
-      this.user = response;
-    });
-
-    this.authService.userDetails().subscribe((response: any) => {
-      this.userDetails = response;
-    });
   }
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class EditProfileComponent implements OnInit {
       "stateFormControl": this.userDetails.state,
       "educationFormArray": this.userDetails.education,
       "experienceFormArray": this.userDetails.experience,
-      "projectFormArray": this.userDetails.projectDetails,
+      "projectFormArray": this.userDetails.projectDetails
     });
     //Loop for entire lengths of 3 Arrays
   }
