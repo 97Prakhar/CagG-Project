@@ -17,14 +17,6 @@ export class EditProfileComponent implements OnInit {
   userDetails: any;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
-    this.authService.getProfile().subscribe((response: any) => {
-      this.user = response;
-    });
-
-    this.authService.userDetails().subscribe((response: any) => {
-      this.userDetails = response;
-    });
-
     this.editProfileForm = this.fb.group({
       firstNameFormControl: ['', [Validators.required, Validators.minLength(4)]],
       lastNameFormControl: ['', [Validators.required, Validators.minLength(4)]],
@@ -44,17 +36,70 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.editProfileForm.patchValue({
-      "firstNameFormControl": this.userDetails.firstName,
-      "lastNameFormControl": this.userDetails.lastName,
-      "contactFormControl": this.userDetails.contact,
-      "countryFormControl": this.userDetails.country,
-      "stateFormControl": this.userDetails.state,
-      "educationFormArray": this.userDetails.education,
-      "experienceFormArray": this.userDetails.experience,
-      "projectFormArray": this.userDetails.projectDetails
+    this.authService.getProfile().subscribe((response: any) => {
+      this.user = response;
     });
-    //Loop for entire lengths of 3 Arrays
+
+    this.authService.userDetails().subscribe((response: any) => {
+      this.userDetails = response;
+      this.editProfileForm.patchValue({
+        "firstNameFormControl": this.userDetails.firstName,
+        "lastNameFormControl": this.userDetails.lastName,
+        "contactFormControl": this.userDetails.contact,
+        "countryFormControl": this.userDetails.country,
+        "stateFormControl": this.userDetails.state
+      });
+      this.editProfileForm.setControl('educationFormArray', this.setEducationDetails(this.userDetails.education));
+      this.editProfileForm.setControl('experienceFormArray', this.setExperienceDetails(this.userDetails.experience));
+      this.editProfileForm.setControl('projectFormArray', this.setProjectDetails(this.userDetails.projectDetails));
+    });
+  }
+
+  setEducationDetails(edu): FormArray {
+    const formArray = new FormArray([]);
+    edu.forEach(ed => {
+      formArray.push(this.fb.group({
+        degree: ed.degree,
+        college: ed.college,
+        percentage: ed.percentage,
+        fromEducationDate: ed.fromEducationDate,
+        toEducationDate: ed.toEducationDate
+      }));
+    });
+
+    return formArray;
+  }
+
+  setExperienceDetails(exper): FormArray {
+    const formArray = new FormArray([]);
+    exper.forEach(exp => {
+      formArray.push(this.fb.group({
+        organisation: exp.organisation,
+        designation: exp.designation,
+        location: exp.location,
+        description: exp.description,
+        fromExperienceDate: exp.fromExperienceDate,
+        toExperienceDate: exp.toExperienceDate
+      }));
+    });
+
+    return formArray;
+  }
+
+  setProjectDetails(projs): FormArray {
+    const formArray = new FormArray([]);
+    projs.forEach(proj => {
+      formArray.push(this.fb.group({
+        projectTitle: proj.projectTitle,
+        client: proj.client,
+        location: proj.location,
+        description: proj.description,
+        fromProjectDate: proj.fromProjectDate,
+        toProjectDate: proj.toProjectDate      
+      }));
+    });
+
+    return formArray;
   }
 
   // Education Dynamic Form
