@@ -3,13 +3,13 @@ A MEAN Stack Application where user can Register, Login, View and Edit their edu
 
 # Steps for running the server
 
-Step 1: Go to bin folder inside MongoDB folder where MongoDB is installed on system using command:
+Step 1: Go to bin folder inside MongoDB folder where MongoDB is installed on system using command (generally installed in Program Files):
 
-cd C:\Program Files\MongoDB\Server\4.2\bin
+cd <MongoDB Folder Path>
 
 Step 2: Make a folder named "data" in the project folder. Run server using command:
 
-mongod.exe --dbpath c:\Users\hi\Desktop\CagG-Project\CagG-Project\data
+mongod.exe --dbpath <Data Folder Path>
 
 # Steps for running Backend
 
