@@ -1,4 +1,4 @@
-# CagG-Project
+# MEAN Stack Project
 A MEAN Stack Application where user can Register, Login, View and Edit their education & professional details.
 
 # Steps for running the server
